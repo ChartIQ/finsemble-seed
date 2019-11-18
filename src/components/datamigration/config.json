@@ -1,0 +1,36 @@
+{
+    "components": {
+        "datamigration": {
+            "window": {
+                "url": "$applicationRoot/components/datamigration/datamigration.html",
+                "frame": false,
+                "resizable": true,
+                "autoShow": false,
+                "top": "center",
+                "left": "center",
+                "width": 800,
+                "height": 600
+            },
+            "component": {
+                "preload": false,
+                "spawnOnStartup": false
+            },
+            "foreign": {
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": false
+                    },
+                    "Window Manager": {
+                        "alwaysOnTopIcon": true,
+                        "title": "Data Migration Assistant",
+                        "FSBLHeader": true,
+                        "persistWindowState": true
+                    },
+                    "Toolbar": {
+                        "iconClass": "datamigration"
+                    }
+                }
+            }
+        }
+    }  
+}

@@ -1,0 +1,11 @@
+{
+    "services": {
+        "datamigrationService": {
+            "useWindow": true,
+            "active": true,
+            "name": "datamigrationService",
+            "visible": false,
+            "html": "$applicationRoot/services/datamigration/datamigration.html"
+        }
+    }
+}

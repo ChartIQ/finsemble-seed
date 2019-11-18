@@ -94,10 +94,10 @@
 			]
 		},
 		"storage": {
-			"defaultStorage": "IndexedDBAdapter",
+			"defaultStorage": "LocalStorageAdapter",
 			"topicToDataStoreAdapters": {
-				"finsemble": "IndexedDBAdapter",
-				"finsemble.workspace": "IndexedDBAdapter",
+				"finsemble": "LocalStorageAdapter",
+				"finsemble.workspace": "LocalStorageAdapter",
 				"finsemble.workspace.cache": "IndexedDBAdapter"
 			},
 			"dataStoreAdapters": {

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Data Migration Assistant</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" type="text/css" href="datamigration.css">
+   <script src="datamigration.js"></script>
+</head>
+<body>
+<h1>Data Migration Assistant</h1>
+
+<div id="migrationWarning" class="migration-needed"><h2>Your user data may need to be migrated.</h2>
+  <p class="warning">If this message is unexpected, please click "Cancel and shut down" and contact your IT helpdesk.</p>
+  <button id="cancel">Cancel and shut down.</button> <button id="begin">Begin migration now.</button>
+</div>
+
+<div id="migrationNotNeeded" class="hidden migration-not-needed">
+  <h2>Your user data has been migrated. You may dismiss this window.</h2>
+</div>
+
+<div id="migrationComplete" class="hidden migration-not-needed">
+  <h2>Your user data has been migrated.</h2>
+  <button id="restart">Restart to continue.</button>
+</div>
+  
+</body>
+</html>

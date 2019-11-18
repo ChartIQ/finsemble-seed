@@ -1,0 +1,12 @@
+body {
+	margin:0px;
+	font-family: sans-serif;
+}
+
+.hidden {
+	visibility: hidden;
+}
+
+.warning {
+	color: #f00;
+}

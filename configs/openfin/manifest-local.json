@@ -70,7 +70,9 @@
         "servicesRoot": "$applicationRoot/finsemble/services",
         "notificationURL": "$applicationRoot/components/notification/notification.html",
         "importConfig": [
-            "$applicationRoot/configs/application/config.json"
+            "$applicationRoot/configs/application/config.json",
+            "$applicationRoot/components/datamigration/config.json",
+            "$applicationRoot/services/datamigration/config.json"
         ],
         "IAC": {
             "serverAddress": "ws://127.0.0.1:3376"

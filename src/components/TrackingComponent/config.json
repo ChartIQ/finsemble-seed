@@ -1,0 +1,86 @@
+{
+    "components":{
+        "Notepad": {
+            "window": {
+				"windowType": "assimilation",
+				"name": "Notepad",
+                "path": "notepad.exe",
+                "defaultHeight": 600,
+                "autoShow": true,
+                "resizable": true,
+                "showTaskbarIcon": false,
+                "contextMenu": true,
+                "addToWorkspace": false,
+                "options": {
+                    "alwaysOnTop": false
+                }
+            },
+            "component": {
+				"singleton": true
+            },
+            "foreign": {
+                "services": {
+                    "windowService": {
+                        "allowAutoArrange": true
+                    }
+                },
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": false
+                    },
+                    "Window Manager": {
+                        "persistWindowState": false,
+                        "FSBLHeader": false
+                    },
+                    "Toolbar": {
+                        "iconURL": "$applicationRoot/assets/img/notepad.png"
+                    }
+                }
+            }
+        },
+        "TrackingComponent": {
+            "window": {
+                "url": "$applicationRoot/components/TrackingComponent/TrackingComponent.html",
+                "frame": false,
+                "resizable": true,
+                "autoShow": true,
+                "top": "center",
+                "left": "center",
+                "width": 800,
+                "height": 600,
+                "options": {                    
+                    "autoShow": false,
+                    "showTaskbarIcon": false              
+                },
+                "data":{
+                    "componentToTrack": "Notepad"          
+                }
+            },
+            "component": { 
+				"singleton": true,
+				"preload": false
+            },
+            "foreign": {
+                "services": {
+                    "dockingService": {
+                        "canGroup": true,
+                        "isArrangable": true
+                    }
+                },
+                "components": {
+                    "App Launcher": {
+                        "launchableByUser": true
+                    },
+                    "Window Manager": {
+                        "title": "TrackingComponent",
+                        "FSBLHeader": false,
+                        "persistWindowState": true
+                    },
+                    "Toolbar": {
+                        "iconClass": "TrackingComponent"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -1,1 +1,6 @@
-{}
+{
+    "TrackingComponent": {
+        "output": "components/TrackingComponent/TrackingComponent",
+        "entry": "./src/components/TrackingComponent/TrackingComponent.js"
+    }
+}

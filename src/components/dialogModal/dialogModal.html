@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="../../vendor.bundle.js"></script>
+		<title>Dialog Modal</title>
+		<style>
+			body {
+				background-color: black;
+			}
+		</style>
+	</head>
+
+	<body />
+
+	<script>
+		FSBL.addEventListener("onReady", function () {
+			document.body.addEventListener("keydown", function (e) {
+				if (e.code === "Escape") {
+					FSBL.Clients.DialogManager.hideModal();
+				}
+			});
+			FSBL.Clients.DialogManager.registerModal();
+			finsembleWindow.hide();
+		});
+		var drop = function (e) {
+			FSBL.Clients.RouterClient.transmit("tabbingDragEnd", { gotDrop: true });
+			FSBL.Clients.WindowClient.stopTilingOrTabbing({
+				mousePosition: {
+					x: e.screenX,
+					y: e.screenY,
+				},
+			});
+		};
+
+		var dragOver = function (e) {
+			e.preventDefault();
+			return false;
+		};
+
+		document.addEventListener("drop", drop);
+		document.addEventListener("dragover", dragOver);
+	</script>
+</html>

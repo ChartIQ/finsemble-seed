@@ -1,21 +1,21 @@
 {
 	"compilerOptions": {
+		"allowJs": true,
+		"allowSyntheticDefaultImports": true,
 		"jsx": "react",
-		"target": "es2017",
-		"module": "commonjs",
+		"moduleResolution": "node",
 		"noImplicitAny": true,
-		"removeComments": true,
 		"preserveConstEnums": true,
+		"removeComments": true,
 		"sourceMap": true,
-		"allowJs": true
+		"strict": true,
+		"target": "es2017",
+		"typeRoots": [
+			"node_modules/@types",
+			"node_modules/@finsemble/finsemble-core/types",
+			"node_modules/@finsemble/finsemble-ui/react/types"
+		]
 	},
-	"include": [
-		"src/**/*",
-		"src-built-in/**/*",
-		"./finsemble/types/**/*"
-	],
-	"exclude": [
-		"node_modules",
-		"**/*.spec.ts"
-	]
+	"include": ["src/**/*"],
+	"exclude": []
 }

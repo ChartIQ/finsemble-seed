@@ -1,6 +1,6 @@
 {
+	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/securityPoliciesFile.schema.json",
 	"securityPolicies": {
-		"comment": "Only Supported on electron",
 		"//trusted": "By default, the trusted policy allows access to every API endpoint.",
 		"trusted": {},
 		"untrusted": {

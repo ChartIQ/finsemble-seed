@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script src="../../vendor.bundle.js"></script>
+		<title>Logger</title>
+	</head>
+
+	<body class="notification-wrapper">
+		<div class="notification-header" id="closer">
+			<div class="notification-title-wrapper">
+				<div class="notification-logo"></div>
+				<div class="notification-title">Finsemble Notification</div>
+			</div>
+			<div class="notification-close"><i class="ff-close"></i></div>
+		</div>
+		<div class="notification-body">
+			<div class="notification-content">
+				<div class="notification-description"></div>
+			</div>
+		</div>
+	</body>
+
+	<script>
+		function onNotificationMessage(message) {
+			// Basic templating. Send a message with either "description" or "notification-description" and the
+			// template will inject the text. Messages can be HTML if desired.
+			if (typeof message == "object") {
+				for (var name in message) {
+					var element = document.querySelector(".notification-" + name);
+					if (!element) element = document.querySelector("." + name);
+					if (element) element.innerHTML = message[name];
+				}
+			} else {
+				// If a string is passed as a message then just drop it into the description of our template
+				document.querySelector(".notification-description").innerHTML = message;
+			}
+		}
+
+		var init = function() {
+			document.querySelector("#closer").addEventListener("click", function() {
+				var notification = fin.desktop.Notification.getCurrent();
+				notification.close();
+			});
+		};
+
+		document.addEventListener("DOMContentLoaded", function() {
+			init();
+		});
+	</script>
+</html>

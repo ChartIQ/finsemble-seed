@@ -1,8 +1,7 @@
 (() => {
 	"use strict";
 
-	// Load user configurations from file
-	const users = require("./users.json");
+	let users = {};
 
 	/**
 	 * Gets the configuration for a user and applies it to Finsemble application.
@@ -37,7 +36,12 @@
 			});
 	};
 
-	window.onload = () => {
+	window.onload = async () => {
+		//retrieve the users file
+		let data = await fetch("users.json", {cache: "no-cache"});
+		users = await data.json();
+		//console.log("got users JSON: " + users);
+
 		FSBL.System.hideSplashScreen();
 
 		// Populate dropdown with available users

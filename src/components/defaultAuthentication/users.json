@@ -1,12 +1,14 @@
 {
-    "User1": {
+    "MultipleMenus1": {
         "components": {
             "Component1": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -41,9 +43,11 @@
             "Component2": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -78,9 +82,11 @@
             "Component3": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -115,9 +121,11 @@
             "Component4": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -152,9 +160,11 @@
             "Component5": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -189,9 +199,11 @@
             "Component6": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -226,9 +238,11 @@
             "Component7": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -263,9 +277,11 @@
             "Component8": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -300,9 +316,11 @@
             "Component9": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -337,9 +355,11 @@
             "Component0": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -374,9 +394,11 @@
             "Admin": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -411,9 +433,11 @@
             "User 1": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -448,9 +472,11 @@
             "User 2": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -485,9 +511,11 @@
             "User 3": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -523,30 +551,13 @@
         "menus": [
             {
                 "type": "menuLauncher",
-                "iconClasses": "finsemble-toolbar-brand-logo",
-                "align": "left",
-                "icon": "$applicationRoot/components/assets/img/greyUser.png",
-                "menuType": "File Menu",
-                "preSpawn": true
-            },
-            {
-                "type": "menuLauncher",
-                "align": "left",
-                "label": "Workspaces",
-                "menuType": "Workspace Management Menu",
-                "preSpawn": true,
-                "fontIcon": "ff-workspace"
-            },
-            {
-                "type": "menuLauncher",
                 "align": "left",
                 "label": "File",
                 "menuType": "App Launcher",
                 "customData": {
                     "mode": "file"
                 },
-                "preSpawn": true,
-                "fontIcon": "ff-document-1"
+                "fontIcon": "ff-document-2"
             },
             {
                 "type": "menuLauncher",
@@ -556,8 +567,7 @@
                 "customData": {
                     "mode": "edit"
                 },
-                "preSpawn": true,
-                "fontIcon": "ff-edit"
+                "fontIcon": "ff-adp-edit"
             },
             {
                 "type": "menuLauncher",
@@ -567,8 +577,7 @@
                 "customData": {
                     "mode": "view"
                 },
-                "preSpawn": true,
-                "fontIcon": "ff-layout"
+                "fontIcon": "ff-adp-workspace"
             },
             {
                 "type": "menuLauncher",
@@ -583,16 +592,14 @@
                         "User 3"
                     ]
                 },
-                "preSpawn": true,
                 "fontIcon": "ff-user"
             },
             {
                 "type": "menuLauncher",
                 "align": "right",
-                "title": "Settings",
+                "label": "Settings",
                 "menuType": "App Launcher",
                 "customData": {},
-                "preSpawn": true,
                 "fontIcon": "ff-settings"
             }
         ],
@@ -612,627 +619,16 @@
             }
         ]
     },
-    "User2": {
+    "MultipleMenus2": {
         "components": {
             "Component1": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "file",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
                     },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component2": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "file",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component3": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "file",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component4": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "file",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component5": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "edit",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component6": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "edit",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component7": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "edit",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component8": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component9": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Component0": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "Admin": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "User 1": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "User 2": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            },
-            "User 3": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
-                    "top": "center",
-                    "left": "center",
-                    "width": 400,
-                    "height": 370
-                },
-                "component": {
-                    "mode": "view",
-                    "inject": false,
-                    "spawnOnStartup": false
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "canGroup": true,
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": true,
-                            "persistWindowState": true
-                        },
-                        "Toolbar": {
-                            "iconClass": "welcome"
-                        }
-                    }
-                }
-            }
-        },
-        "menus": [
-            {
-                "type": "menuLauncher",
-                "iconClasses": "finsemble-toolbar-brand-logo",
-                "align": "left",
-                "icon": "data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTkuMC4wLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDUxMiA1MTIiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDUxMiA1MTI7IiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiPgo8ZyB0cmFuc2Zvcm09Im1hdHJpeCgxLjI1IDAgMCAtMS4yNSAwIDQ1KSI+Cgk8Zz4KCQk8Zz4KCQkJPHBhdGggc3R5bGU9ImZpbGw6IzNCODhDMzsiIGQ9Ik00MDkuNi0zMjguMDg5YzAtMjUuMTM0LTIwLjM3OC00NS41MTEtNDUuNTExLTQ1LjUxMUg0NS41MTFDMjAuMzc4LTM3My42LDAtMzUzLjIyMiwwLTMyOC4wODkgICAgIFYtOS41MTFDMCwxNS42MjIsMjAuMzc4LDM2LDQ1LjUxMSwzNmgzMTguNTc4QzM4OS4yMjIsMzYsNDA5LjYsMTUuNjIyLDQwOS42LTkuNTExVi0zMjguMDg5eiIvPgoJCQk8cGF0aCBzdHlsZT0iZmlsbDojRkZGRkZGOyIgZD0iTTI2Mi43MTMtMjEzLjUxNWM1Ljk4NSwxMy40MTQsOC40NjUsMjguOTIyLDguNDY1LDQ1LjE1OGMwLDQxLjk3My0yMi4yMzIsODEuMTM1LTY2LjMzMiw4MS4xMzUgICAgIGMtNDQuMDg5LDAtNjYuMzIxLTM4LjQ0Ni02Ni4zMjEtODEuMTM1YzAtNDMuMDMxLDIxLjUyNy04MS4xNDYsNjYuMzIxLTgxLjE0NmM4LjExMiwwLDE1LjUzMSwxLjA3LDIyLjU3NCwyLjQ4bC0xMi42ODYsMTIuMzQ1ICAgICBjLTMuODkxLDMuNTI3LTYuNzEzLDkuMTctNi43MTMsMTQuMTA4YzAsMTMuNzU2LDkuNTM1LDI1LjM5NSwyMy45OTYsMjUuMzk1YzQuOTM4LDAsOS4xNTktMS43NjQsMTMuNDAzLTQuNTg1TDI2Mi43MTMtMjEzLjUxNXogICAgICBNMjY2LjkzNC0yODIuNjU3Yy0xNy4yODMtOS44NzYtMzguMDkzLTE1LjUxOS02Mi4wODktMTUuNTE5Yy03MS42MTIsMC0xMjEuMzQ0LDU2Ljc5OC0xMjEuMzQ0LDEyOS44MiAgICAgYzAsNzMuMzc1LDQ5LjM4LDEyOS44MiwxMjEuMzQ0LDEyOS44MmM3MC45MDYsMCwxMjEuMzU1LTU4LjIwOSwxMjEuMzU1LTEyOS44MmMwLTMxLjA1LTguMTEyLTU5LjI2Ny0yMy42NDMtODEuNDg4ICAgICBsMjAuMTE2LTE3LjI5NGM2LjcwMi01Ljk5NiwxMi4zNDUtMTEuNjM5LDEyLjM0NS0yMS41MjdjMC0xMi4zMzMtMTIuMzQ1LTIyLjIyMS0yNC4zMjYtMjIuMjIxICAgICBjLTcuNzgyLDAtMTQuMTA4LDMuMTg2LTIzLjY0MywxMS4yOThMMjY2LjkzNC0yODIuNjU3TDI2Ni45MzQtMjgyLjY1N3oiLz4KCQk8L2c+Cgk8L2c+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPGc+CjwvZz4KPC9zdmc+Cg==",
-                "menuType": "File Menu",
-                "preSpawn": true
-            },
-            {
-                "type": "menuLauncher",
-                "align": "left",
-                "title": "Workspaces",
-                "menuType": "Workspace Management Menu",
-                "preSpawn": true,
-                "fontIcon": "ff-workspace"
-            },
-            {
-                "type": "menuLauncher",
-                "align": "left",
-                "title": "File",
-                "menuType": "App Launcher",
-                "customData": {
-                    "mode": "file"
-                },
-                "preSpawn": true,
-                "fontIcon": "ff-document-1"
-            },
-            {
-                "type": "menuLauncher",
-                "align": "left",
-                "title": "Edit",
-                "menuType": "App Launcher",
-                "customData": {
-                    "mode": "edit"
-                },
-                "preSpawn": true,
-                "fontIcon": "ff-edit"
-            },
-            {
-                "type": "menuLauncher",
-                "align": "left",
-                "title": "View",
-                "menuType": "App Launcher",
-                "customData": {
-                    "mode": "view"
-                },
-                "preSpawn": true,
-                "fontIcon": "ff-layout"
-            },
-            {
-                "type": "menuLauncher",
-                "align": "right",
-                "title": "Admin",
-                "menuType": "App Launcher",
-                "customData": {
-                    "list": [
-                        "Admin",
-                        "User 1",
-                        "User 2",
-                        "User 3"
-                    ]
-                },
-                "preSpawn": true,
-                "fontIcon": "ff-user"
-            },
-            {
-                "type": "menuLauncher",
-                "align": "right",
-                "title": "Settings",
-                "menuType": "App Launcher",
-                "customData": {},
-                "preSpawn": true,
-                "fontIcon": "ff-settings"
-            }
-        ],
-        "workspaces": [
-            {
-                "name": "One Component",
-                "windows": [],
-                "components": [
-                    {
-                        "type": "Component1",
-                        "options": {
-                            "top": 50,
-                            "left": 50
-                        }
-                    }
-                ]
-            }
-        ]
-    },
-    "User3": {
-        "components": {
-            "Component1": {
-                "window": {
-                    "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1266,9 +662,11 @@
             "Component2": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1302,9 +700,11 @@
             "Component3": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1338,9 +738,11 @@
             "Component4": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1374,9 +776,11 @@
             "Component6": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1410,9 +814,11 @@
             "Component7": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1446,9 +852,11 @@
             "Component8": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1482,9 +890,11 @@
             "Component9": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1518,9 +928,11 @@
             "Component0": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1554,9 +966,11 @@
             "ComponentA": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1590,9 +1004,11 @@
             "ComponentB": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1626,9 +1042,11 @@
             "ComponentC": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1662,9 +1080,11 @@
             "ComponentD": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1698,9 +1118,11 @@
             "ComponentE": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1734,9 +1156,11 @@
             "ComponentF": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1770,9 +1194,11 @@
             "ComponentG": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1806,9 +1232,11 @@
             "ComponentH": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1842,9 +1270,11 @@
             "ComponentI": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1878,9 +1308,11 @@
             "ComponentJ": {
                 "window": {
                     "url": "$applicationRoot/components/welcome/welcome.html",
-                    "frame": false,
-                    "resizable": true,
-                    "autoShow": true,
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "top": "center",
                     "left": "center",
                     "width": 400,
@@ -1913,29 +1345,6 @@
             }
         },
         "menus": [
-            {
-                "align": "left",
-                "iconClasses": "finsemble-toolbar-brand-logo",
-                "icon": "$applicationRoot/components/assets/img/coins.png",
-                "title": "File",
-                "menuType": "File Menu"
-            },
-            {
-                "align": "left",
-                "label": "Workspaces",
-                "menuType": "Workspace Management Menu",
-                "icon": "$applicationRoot/components/assets/img/briefcase.png"
-            },
-            {
-                "align": "right",
-                "type": "reactComponent",
-                "reactComponent": "AutoArrange"
-            },
-            {
-                "align": "right",
-                "type": "reactComponent",
-                "reactComponent": "BringToFront"
-            },
             {
                 "align": "left",
                 "label": "File",
@@ -2057,63 +1466,16 @@
             }
         ]
     },
-    "User4": {
+    "AdvancedLauncher": {
         "components": {
-            "Finsemble Documentation": {
-                "window": {
-                    "url": "http://documentation.chartiq.com/finsemble",
-                    "left": "center",
-                    "top": "center",
-                    "height": 800,
-                    "width": 1000
-                },
-                "component": {},
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": false
-                        },
-                        "Window Manager": {
-                            "persistWindowState": false,
-                            "FSBLHeader": true,
-                            "showLinker": false
-                        }
-                    }
-                }
-            },
-            "Getting Started Tutorial": {
-                "window": {
-                    "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
-                    "height": 800,
-                    "width": 1000
-                },
-                "component": {},
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "persistWindowState": true,
-                            "FSBLHeader": true,
-                            "showLinker": false
-                        }
-                    }
-                }
-            },
             "Component 1": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2138,6 +1500,11 @@
             "Component 2": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2162,6 +1529,11 @@
             "Component 3": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2186,6 +1558,11 @@
             "Component 4": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2210,6 +1587,11 @@
             "Component 5": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2234,6 +1616,11 @@
             "Component 6": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2258,6 +1645,11 @@
             "Component 7": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2282,6 +1674,11 @@
             "Component 8": {
                 "window": {
                     "url": "https://documentation.chartiq.com/finsemble/tutorial-gettingStarted.html",
+                    "options": {
+                        "frame": false,
+                        "resizable": true,
+                        "autoShow": true
+                    },
                     "height": 800,
                     "width": 1000
                 },
@@ -2302,92 +1699,15 @@
                         }
                     }
                 }
-            },
-            "Notepad": {
-                "window": {
-                    "path": "notepad.exe",
-                    "native": true
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "isArrangable": true
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": true
-                        },
-                        "Window Manager": {
-                            "persistWindowState": true,
-                            "FSBLHeader": true,
-                            "showLinker": false
-                        }
-                    }
-                }
-            },
-            "Docking Move Mask": {
-                "window": {
-                    "url": "$applicationRoot/components/dockingGroupMask/dockingGroupMask.html",
-                    "frame": false,
-                    "resizable": false,
-                    "showTaskbarIcon": false,
-                    "options": {
-                        "opacity": 0.7,
-                        "autoShow": false
-                    }
-                },
-                "component": {
-                    "category": "system"
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "isArrangable": false
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": false
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": false,
-                            "persistWindowState": false
-                        }
-                    }
-                }
-            },
-            "windowTitleBar": {
-                "window": {
-                    "url": "$applicationRoot/components/windowTitleBar/windowTitleBar.js",
-                    "top": "center",
-                    "left": "center",
-                    "width": 358,
-                    "height": 458,
-                    "ephemeral": true
-                },
-                "component": {
-                    "category": "system"
-                },
-                "foreign": {
-                    "services": {
-                        "dockingService": {
-                            "isArrangable": false
-                        }
-                    },
-                    "components": {
-                        "App Launcher": {
-                            "launchableByUser": false
-                        },
-                        "Window Manager": {
-                            "FSBLHeader": false,
-                            "persistWindowState": false
-                        }
-                    }
-                }
             }
         },
-        "menus": [],
+        "menus": [
+            {
+                "align": "left",
+                "label": "Adv Launcher",
+                "menuType": "Advanced App Launcher"
+            }
+        ],
         "workspaces": [
             {
                 "name": "Default Workspace",

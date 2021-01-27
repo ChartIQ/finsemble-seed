@@ -1,5 +1,6 @@
 {
 	"comment": "Sample component configuration",
+	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/componentsFile.schema.json",
 	"components": {
 		"Welcome Component": {
 			"window": {
@@ -58,6 +59,13 @@
 				"left": "center",
 				"width": 400,
 				"height": 432
+			},
+			"foreign": {
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					}
+				}
 			}
 		},
 		"Notepad": {
@@ -70,14 +78,11 @@
 				},
 				"showTaskbarIcon": false,
 				"contextMenu": true,
-				"addToWorkspace": true
+				"addToWorkspace": true,
+				"native": true
 			},
 			"component": {
-				"spawnOnHotkey": [
-					"ctrl",
-					"alt",
-					"n"
-				]
+				"spawnOnHotkey": ["ctrl", "alt", "n"]
 			},
 			"foreign": {
 				"services": {
@@ -101,7 +106,7 @@
 		},
 		"Getting Started Tutorial": {
 			"window": {
-				"url": "https://www.chartiq.com/tutorials/?slug=finsemble",
+				"url": "https://documentation.finsemble.com/tutorial-gettingStarted.html",
 				"height": 800,
 				"width": 1000
 			},
@@ -163,14 +168,47 @@
 				"width": 358,
 				"height": 192,
 				"ephemeral": true,
-				"autoShow": true
+				"alwaysOnTop": true,
+				"options": {
+					"autoShow": true
+				}
 			},
 			"component": {
-				"neededClients": [
-					"LauncherClient",
-					"AuthenticationClient",
-					"StorageClient"
-				],
+				"neededClients": ["LauncherClient", "AuthenticationClient", "StorageClient"],
+				"category": "system"
+			},
+			"foreign": {
+				"services": {
+					"windowService": {
+						"allowAutoArrange": false
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					},
+					"Window Manager": {
+						"FSBLHeader": false,
+						"persistWindowState": false
+					}
+				}
+			}
+		},
+		"Registration": {
+			"window": {
+				"url": "$applicationRoot/components/registration/registration.html",
+				"top": "center",
+				"left": "center",
+				"width": 400,
+				"height": 500,
+				"ephemeral": true,
+				"alwaysOnTop": true,
+				"options": {
+					"autoShow": false
+				}
+			},
+			"component": {
+				"neededClients": ["LauncherClient", "AuthenticationClient", "StorageClient"],
 				"category": "system"
 			},
 			"foreign": {

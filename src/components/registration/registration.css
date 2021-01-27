@@ -1,0 +1,35 @@
+.fsbl-auth-logo {
+	content: url(/assets/file-loader/Finsemble_Taskbar_Icon.png);
+	width: 59px;
+	height: 64px;
+	margin-top: 0px;
+	margin-bottom: 10px;
+}
+
+.fsbl-auth-welcome {
+	margin-left: 20px;
+	margin-right: 20px;
+	font-weight: normal;
+	text-align: center;
+}
+
+.fsbl-copyright {
+	font-weight: normal;
+	font-size: xx-small;
+	text-align: center;
+}
+
+.fsbl-link {
+	display: inline-block;
+}
+
+div.fsbl-registration {
+	display: grid;
+	grid-template-columns: max-content max-content;
+	grid-gap: 5px;
+}
+
+div.fsbl-registration label {
+	text-align: right;
+	padding-top: 10px;
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<!--
+    /**
+    * Copyright 2019, ChartIQ, Inc.
+    * All rights reserved.
+	*/
+	
+	OAUTH Authentication example. This example uses Google as a OpenID Provider (OP).
+-->
+
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<title>Oauth Authentication</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			/** Class for handling oAuth returns */
+			class HandleOauth {
+				constructor() {}
+
+				/**
+				 *  closeThisWindow
+				 *
+				 *  When we close this window, if the user isn't logged in then it must mean we
+				 *  were using OAUTH to log in, and it failed, so shut down the entire app. Otherwise
+				 *  we were just using it to authenticate a client, in which case we just want to close
+				 * this window but keep Finsemble running.
+				 */
+				closeThisWindow() {
+					FSBL.Clients.AuthenticationClient.getCurrentCredentials((err, credentials) => {
+						if (!credentials) {
+							FSBL.shutdownApplication();
+						} else {
+							FSBL.Clients.WindowClient.getCurrentWindow().close();
+						}
+					});
+				}
+
+				/**
+				 * showError
+				 *
+				 * @param {string} reason Textual representation of why the Oauth Process Failed
+				 */
+				showError(reason) {
+					document.querySelector("#error").innerHTML = `Oauth Failed: ${reason}`;
+				}
+
+				/**
+				 * runBusinessLogic
+				 *
+				 * Run your oAuth business logic to handle the user's action
+				 *
+				 * @param {object} credentials
+				 * @param {function} cb The callback function to invoke when your custom logic has completed.
+				 */
+				runBusinessLogic(credentials, cb) {
+					// Run your custom  business logic here. For instance, fetch dynamic config based on the user's credentials.
+					cb();
+				}
+			}
+
+			const OauthClient = new HandleOauth();
+
+			FSBL.Clients.AuthenticationClient.completeOAUTH(null, null, (err, response) => {
+				if (err) {
+					OauthClient.showError(err);
+				} else {
+					const credentials = response;
+					OauthClient.runBusinessLogic(credentials, () => {
+						// In the special case of "startup" then we publish the authorization, which releases Finsemble and lets is start
+						if (credentials.config.name === "startup") {
+							// "sub" is the user ID provided by the OP. Not all OP's support this. If not supported, then we just set the user to the access token.
+							const user = credentials.sub;
+							if (!user) {
+								user = credentials.access_token;
+							}
+							// Finish the authentication process
+							FSBL.Clients.RouterClient.transmit("AuthenticationService.authorization", {
+								user: user,
+								credentials: credentials,
+							});
+						}
+						OauthClient.closeThisWindow();
+					});
+				}
+			});
+		</script>
+		<link
+			href="https://fonts.googleapis.com/css?family=Roboto:400,700,500,100,300,400italic|Roboto+Condensed:400,700,300"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<link rel="stylesheet" type="text/css" href="../../assets/css/finsemble.css" />
+		<link rel="stylesheet" type="text/css" href="../../assets/css/font-finance.css" />
+	</head>
+
+	<body class="dialog">
+		<style>
+			.fsbl-auth-top {
+				display: flex;
+				justify-content: space-between;
+				height: 20px;
+				align-items: center;
+				padding: 10px 10px 5px 0px;
+			}
+
+			.fsbl-close {
+				cursor: pointer;
+				display: flex;
+				justify-content: flex-end;
+				align-items: flex-start;
+				flex-direction: column;
+				height: 100%;
+			}
+
+			#error {
+				text-align: center;
+				margin-top: 50px;
+			}
+
+			body {
+				background: white;
+				max-height: 442px;
+				max-width: 342px;
+			}
+		</style>
+		<div class="fsbl-auth-top">
+			<img class="fsbl-logo" src="../../assets/img/cosaic-banner-100x20.png" width="100" height="25" />
+			<div class="fsbl-close" id="FSBL-close" onclick="OauthClient.closeThisWindow()">
+				<i class="ff-close" style="color: #666;"></i>
+			</div>
+		</div>
+		<div id="error"></div>
+	</body>
+</html>

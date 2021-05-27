@@ -1,4 +1,6 @@
 {
+	"comment": "config to define default workspace on first run",
+	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/workspacesFile.schema.json",
 	"workspaces": [
 		{
 			"version": "1.0.0",

@@ -1,152 +1,39 @@
-const { launch, connect } = require('hadouken-js-adapter');
-
 (() => {
 	"use strict";
 
 	// #region Imports
 	// NPM
-	const chalk = require("chalk");
-	chalk.enabled = true;
-	//setting the level to 1 will force color output.
-	chalk.level = 1;
 	const async = require("async");
-	const { exec, spawn } = require("child_process");
-	const ON_DEATH = require("death")({ debug: false });
-	const del = require("del");
+	const { spawn } = require("child_process");
 	const fs = require("fs");
 	const gulp = require("gulp");
-	const prettyHrtime = require("pretty-hrtime");
 	const shell = require("shelljs");
 	const path = require("path");
-	const webpack = require("webpack");
-
-	const FEA_PATH = path.join(__dirname, "node_modules", "@chartiq", "finsemble-electron-adapter");
-	const FEA_PATH_EXISTS = fs.existsSync(FEA_PATH);
-	const FEA = FEA_PATH_EXISTS ? require("@chartiq/finsemble-electron-adapter/exports") : undefined;
+	const treeKill = require("tree-kill");
+	let FEA;
+	// Internal Cosaic development: exports doesn't exist when running yarn clean
+	try {
+		FEA = require("@finsemble/finsemble-electron-adapter/exports");
+	} catch (e) {}
+	const FEA_PATH = path.resolve("./node_modules/@finsemble/finsemble-electron-adapter");
 	const FEAPackager = FEA ? FEA.packager : undefined;
-	const MAX_NODE_VERSION = '12.13.1';
+	const startupConfig = require("./configs/other/server-environment-startup");
+	const { envOrArg, runWebpackAndCallback, logToTerminal, runWebpackInParallel } = require("./build/buildHelpers");
+	const INSTALLER_CERT_PASS = "INSTALLER_CERTIFICATE_PASSPHRASE";
 
 	// local
 	const extensions = fs.existsSync("./gulpfile-extensions.js") ? require("./gulpfile-extensions.js") : undefined;
 	const isMacOrNix = process.platform !== "win32";
-	// #endregion
-
-	const killApp = (processName, callback = () => { }) => {
-		const command = isMacOrNix ? `killall -9 ${processName}` : `taskkill /F /IM ${processName.toLowerCase()}.* /T`;
-		const error = isMacOrNix ? "No matching processes belonging to you were found" : `The process "${processName.toLowerCase()}.*" not found.`;
-
-		logToTerminal(`kill: running: ${command}...`);
-
-		exec(command, err => {
-			if (err && !err.includes(error)) {
-				console.error(errorOutColor(err));
-			}
-
-			callback(err);
-		});
-	};
-
-	const logToTerminal = (msg, color = "white", bgcolor = "bgBlack") => {
-		if (!chalk[color]) color = "white";
-		if (!chalk[color][bgcolor]) bgcolor = "bgBlack";
-		console.log(`[${new Date().toLocaleTimeString()}] ${chalk[color][bgcolor](msg)}.`);
-	}
-
-	/** 
-	* Splits a string version with semantic versioning into an object with major, minor and patch versions
-	* Valid inputs are 'X.X.X' or 'vX.X.X'
-	*/
-	const createSemverObject = (version) => {
-		let tempVersionArray;
-		let semverObject;
-		if (typeof version !== 'string') {
-			console.log(`Version must be type string but is ${typeof version}`);
-			return;
-		}
-		// Split the version into a temp array.
-		if (version.startsWith('v')) {
-			tempVersionArray = version.split('v');
-			tempVersionArray = tempVersionArray[1].split('.');
-		} else {
-			tempVersionArray = version.split('.')
-		}
-		if (tempVersionArray.length === 3) {
-
-			// Convert each array element to a number and store in the object.
-			semverObject = {
-				majorVersion: Number(tempVersionArray[0]) || null,
-				minorVersion: Number(tempVersionArray[1]) || null,
-				patchVersion: Number(tempVersionArray[2]) || null,
-			}
-			// If major, minor or patch versions are missing or not a number return nothing
-			if (!semverObject.majorVersion || !semverObject.minorVersion || !semverObject.patchVersion) {
-				return;
-			}
-			return semverObject
-		}
-	}
-
-	/** 
-	* Compares two node version objects
-	* Each object is expected to contain majorVersion, minorVersion, patchVersion
-	*/
-	const compareNodeVersions = (a, b) => {
-		if (a.majorVersion !== b.majorVersion) {
-			return a.majorVersion > b.majorVersion ? 1: -1
-		}
-		if (a.minorVersion !== b.minorVersion) {
-			return a.minorVersion > b.minorVersion ? 1: -1
-		}
-		if (a.patchVersion !== b.patchVersion) {
-			return a.patchVersion > b.patchVersion ? 1: -1
-		}
-		return 0;
-	}
-
-	/** 
-	* Validates the current node version against supported node versions specified in this file
-	* Returns boolean indicating whether current node version is valid
-	* Currently only validates against a max node version which must be in the format 'X.X.X' or 'vX.X.X'
-	*
-	* Note: This method is being used instead of npm engines because of an npm bug where warnings don't print
-	* This bug was resolved in npm 6.12.0 but as that is a very new version of npm and is not linked to node 10.15.3
-	* in nvm we can't assume our users have access to this version.
-	*/
-	const isNodeVersionValid = () => {
-		// Split the current node version into an object with major, minor and patch numbers for easier comparison.
-		// If any of these values are missing, nothing will be returned
-		let currentVersionObject = createSemverObject(process.version);
-		let maxVersionObject = createSemverObject(MAX_NODE_VERSION);
-		
-		// Only allow the check both objects exist and contain major, minor and patch versions. 
-		if (!currentVersionObject || !maxVersionObject) {
-			logToTerminal("Format of node version must be: 'X.X.X', unable to validate node version", "yellow");
-			return true;
-		}
-
-		// Check if the node version is higher than the maximum allowed node version.
-		if (compareNodeVersions(currentVersionObject, maxVersionObject) == 1) return false;
-		return true;
-	}
 
 	let angularComponents;
 	try {
 		angularComponents = require("./build/angular-components.json");
 	} catch (ex) {
-		logToTerminal("No Angular component configuration found", "yellow");
 		angularComponents = null;
 	}
-	// #region Constants
-	const startupConfig = require("./configs/other/server-environment-startup");
-
-	//Force colors on terminals.
-	const errorOutColor = chalk.hex("#FF667E");
-
-	// #endregion
-
 	// If you specify environment variables to child_process, it overwrites all environment variables, including
 	// PATH. So, copy based on our existing env variables.
-	const env = process.env;
+	const { env } = process;
 
 	if (!env.NODE_ENV) {
 		env.NODE_ENV = "development";
@@ -161,79 +48,28 @@ const { launch, connect } = require('hadouken-js-adapter');
 	// build for a development environment and not watch for changes.
 	const isRunningDevTask = process.argv[2].startsWith("dev");
 
-	/**
-	 * Returns the value for the given name, looking in (1) environment variables, (2) command line args
-	 * and (3) startupConfig. For instance, `set BLAH_BLAH=electron` or `npx gulp dev --blah_blah:electron`
-	 * This will search for both all caps, all lowercase and camelcase.
-	 * @param {string} name The name to look for in env variables and args
-	 * @param {string} defaultValue The default value to return if the name isn't found as an env variable or arg
-	 */
-	function envOrArg(name, defaultValue) {
-		let lc = name.toLowerCase();
-		let uc = name.toUpperCase();
-		let cc = name.replace(/(-|_)([a-z])/g, function (g) { return g[1].toUpperCase(); });
-
-		// Check environment variables
-		if (env[lc]) return env[lc];
-		if (env[uc]) return env[uc];
-
-		// Check command line arguments
-		lc = "--" + lc + ":";
-		uc = "--" + uc + ":";
-		let rc = null;
-		process.argv.forEach(arg => {
-			if (arg.startsWith(lc)) rc = arg.split(lc)[1];
-			if (arg.startsWith(uc)) rc = arg.split(uc)[1];
-		});
-
-		// Look in startupConfig
-		if (!rc) {
-			rc = startupConfig[env.NODE_ENV][cc] || startupConfig[env.NODE_ENV][lc] || startupConfig[env.NODE_ENV][uc];
-		}
-		rc = rc || defaultValue;
-		return rc;
-	}
-
-
-	// Currently supported desktop agents include "openfin" and "electron". This can be set either
-	// with the environment variable container or by command line argument `npx gulp dev --container:electron`
-	let container = envOrArg("container", "openfin");
-	container = container.toLowerCase();
-
 	// This is a reference to the server process that is spawned. The server process is located in server/server.js
 	// and is an Express server that runs in its own node process (via spawn() command).
 	let serverProcess = null;
 
-	// This will get set when the container (Electron or Openfin) is launched. This is used to calculate how long it takes to start up the app.
 	let launchTimestamp = 0;
 
 	/**
-	 * Mody 10/04/2019
-	 * Reads installed Electron's version from FEA repo.
-	 * Another option is to export electron's version in
-	 * deploymentHelpers in FEA. However I'm just avoiding 2 PRs
+	 * Returns an object containing the absolute paths of the socket certificate files used to secure Finsemble Transport
+	 * If both a key and certificate path are not configured nothing is returned.
 	 */
-	const getElectronVersion = () => {
-		// You may run `npm run dev` before running `npm i` inside
-		// finsemble-electron-adapter in that case, the electron
-		// module does not exists.
-		try {
-			const packageFile = require(
-				path.join(
-					FEA_PATH,
-					'node_modules',
-					'electron',
-					'package.json')
-			);
-			return packageFile.version;
-		} catch (error) {
-			logToTerminal(`Failed to get electron's verion from FEA: ${error.message}`, "red");
-			return 'unknown';
+	const deriveSocketCertificatePaths = () => {
+		const cfg = taskMethods.startupConfig[env.NODE_ENV];
+		let socketCertificatePath;
+		if (cfg.socketCertificateKey && cfg.socketCertificateCert) {
+			socketCertificatePath = {
+				key: path.resolve(path.join(__dirname, cfg.socketCertificateKey)),
+				cert: path.resolve(path.join(__dirname, cfg.socketCertificateCert)),
+			};
 		}
+		return socketCertificatePath;
 	};
-	// #endregion
 
-	// #region Task Methods
 	/**
 	 * Object containing all of the methods used by the gulp tasks.
 	 */
@@ -248,16 +84,12 @@ const { launch, connect } = require('hadouken-js-adapter');
 		/**
 		 * Builds the application in the distribution directory. Internal only, don't use because no environment is set!!!!
 		 */
-		build: done => {
-			async.series([
-				taskMethods.buildWebpack,
-				taskMethods.buildSass,
-				taskMethods.buildAngular
-			], done);
+		build: (done) => {
+			async.series([taskMethods.buildWebpack, taskMethods.buildAngular], done);
 		},
-		buildAngular: done => {
+		buildAngular: (done) => {
 			if (!angularComponents) return done();
-			let processRow = row => {
+			let processRow = (row) => {
 				const compName = row.source.split("/").pop();
 				const cwd = path.join(__dirname, row.source);
 				const outputPath = path.join(__dirname, row.source, row["output-directory"]);
@@ -274,7 +106,7 @@ const { launch, connect } = require('hadouken-js-adapter');
 			};
 
 			if (angularComponents) {
-				angularComponents.forEach(comp => {
+				angularComponents.forEach((comp) => {
 					processRow(comp);
 				});
 			} else {
@@ -283,91 +115,68 @@ const { launch, connect } = require('hadouken-js-adapter');
 
 			done();
 		},
-		"build:dev": done => {
-			async.series([
-				taskMethods.setDevEnvironment,
-				taskMethods.build
-			], done);
+		"build:dev": (done) => {
+			async.series([taskMethods.setDevEnvironment, taskMethods.build], done);
 		},
-		"build:prod": done => {
-			async.series([
-				taskMethods.setProdEnvironment,
-				taskMethods.build
-			], done);
-		},
-		/**
-		 * Builds the SASS files for the project.
-		 */
-		buildSass: done => {
-			return done();
+		"build:prod": (done) => {
+			async.series([taskMethods.setProdEnvironment, taskMethods.build], done);
 		},
 		/**
 		 * Builds files using webpack.
 		 */
-		buildWebpack: done => {
-			logToTerminal(`Starting webpack. Environment:"${process.env.NODE_ENV}"`)
-			//Helper function that builds webpack, logs errors, and notifies user of start/finish of the webpack task.
-			function packFiles(config, bundleName, callback) {
-				logToTerminal(`Starting to build ${bundleName}`);
-				config.watch = isRunningDevTask;
-				config.bail = true; // Causes webpack to break upon first encountered error. Pretty annoying when build errors scroll off the screen.
-				let startTime = process.hrtime();
-				webpack(config, (err, stats) => {
-					if (!err) {
-						let msg = `Finished building ${bundleName}`;
-						//first run, add nice timer.
-						if (callback) {
-							let end = process.hrtime(startTime);
-							msg += ` after ${chalk.magenta(prettyHrtime(end))}`;
-						}
-						logToTerminal(msg, "cyan");
-					} else {
-						console.error(errorOutColor("Webpack Error.", err));
-					}
-					if (stats.hasErrors()) {
-						console.error(errorOutColor(stats.toJson().errors));
-					}
-					// Webpack will call this function every time the bundle is built.
-					// Webpack is run in "watch" mode which means this function will be called over and over and over.
-					// We only want to invoke the async callback back to the gulp file once - the initial webpack build.
-					if (callback) {
-						callback();
-						callback = undefined;
-					}
-				});
-			}
-
-			//Requires are done in the function because webpack.components.js will error out if there's no vendor-manifest. The first webpack function generates the vendor manifest.
-			async.series([
-				(cb) => {
-					const webpackAdaptersConfig = require("./build/webpack/webpack.adapters");
-					packFiles(webpackAdaptersConfig, "adapters bundle", cb);
-				},
-				(cb) => {
-					const webpackVendorConfig = require("./build/webpack/webpack.vendor.js")
-					packFiles(webpackVendorConfig, "vendor bundle", cb);
-				},
-				(cb) => {
-					const webpackPreloadsConfig = require("./build/webpack/webpack.preloads.js")
-					packFiles(webpackPreloadsConfig, "preload bundle", cb);
-				},
-				(cb) => {
-					const webpackTitleBarConfig = require("./build/webpack/webpack.titleBar.js")
-					packFiles(webpackTitleBarConfig, "titlebar bundle", cb);
-				},
-				(cb) => {
-					const webpackServicesConfig = require("./build/webpack/webpack.services.js")
-					if (webpackServicesConfig) {
-						packFiles(webpackServicesConfig, "services bundle", cb);
-					} else {
-						cb();
-					}
-				},
-				(cb) => {
-					const webpackComponentsConfig = require("./build/webpack/webpack.components.js")
-					packFiles(webpackComponentsConfig, "component bundle", cb);
-				}
-			],
+		buildWebpack: (done) => {
+			const watchFiles = isRunningDevTask;
+			logToTerminal(`Starting webpack. Environment:"${process.env.NODE_ENV}"`);
+			// when we're running our dev tasks, we want to leave the parallel workers up,
+			// working away. When we're building, we want those guys to tear themselves down
+			// so the build doesn't hang indefinitely. If we aren't watching, exit the processes
+			// after building.
+			const exitOnCompletion = !watchFiles;
+			async.series(
+				[
+					// Build the vendor bundle first, as other webpack instances will use it to speed
+					// up their compilation time.
+					(done) => {
+						const configPath = require.resolve("./build/webpack/webpack.vendor.js");
+						const bundleName = "Vendor";
+						runWebpackAndCallback(configPath, watchFiles, bundleName, done);
+					},
+					(done) => {
+						const webpackConfigs = [
+							{
+								configPath: require.resolve("./build/webpack/webpack.assets"),
+								prettyName: "Assets",
+								watch: watchFiles,
+							},
+							{
+								configPath: require.resolve("./build/webpack/webpack.adapters"),
+								prettyName: "Adapters",
+								watch: watchFiles,
+							},
+							{
+								configPath: require.resolve("./build/webpack/webpack.preloads.js"),
+								prettyName: "Preloads",
+								watch: watchFiles,
+							},
+							{
+								configPath: require.resolve("./build/webpack/webpack.titleBar.js"),
+								prettyName: "Titlebar",
+								watch: watchFiles,
+							},
+							{
+								configPath: require.resolve("./build/webpack/webpack.services.js"),
+								prettyName: "Custom Services",
+								watch: watchFiles,
+							},
+							{
+								configPath: require.resolve("./build/webpack/webpack.components.js"),
+								prettyName: "Components",
+								watch: watchFiles,
+							},
+						];
+						runWebpackInParallel(webpackConfigs, exitOnCompletion, done);
+					},
+				],
 				done
 			);
 		},
@@ -375,23 +184,26 @@ const { launch, connect } = require('hadouken-js-adapter');
 		/**
 		 * Cleans the project folder of generated files.
 		 */
-		clean: done => {
-			del(taskMethods.distPath, { force: true });
-			del(".babel_cache", { force: true });
-			del(path.join(__dirname, "build/webpack/vendor-manifest.json"), { force: true });
-			del(".webpack-file-cache", { force: true });
+		clean: (done) => {
+			shell.rm("-rf", taskMethods.distPath);
+			shell.rm("-rf", ".babel_cache");
+			shell.rm("-rf", "finsemble");
+			shell.rm("-rf", path.join(__dirname, "build/webpack/vendor-manifest.json"));
+			shell.rm("-rf", ".webpack-file-cache");
+			shell.rm("-rf", "installer-tmp");
+			shell.rm("-rf", "finsemble");
 			done();
 		},
-		checkSymbolicLinks: done => {
-			const FINSEMBLE_PATH = path.join(__dirname, "node_modules", "@chartiq", "finsemble");
+		checkSymbolicLinks: (done) => {
+			const FINSEMBLE_PATH = path.join(__dirname, "node_modules", "@finsemble", "finsemble-core");
+			const FINSEMBLE_UI_PATH = path.join(__dirname, "node_modules", "@finsemble", "finsemble-ui");
 			const FINSEMBLE_VERSION = require(path.join(FINSEMBLE_PATH, "package.json")).version;
-			const CLI_PATH = path.join(__dirname, "node_modules", "@chartiq", "finsemble-cli");
+			const FINSEMBLE_UI_VERSION = require(path.join(FINSEMBLE_UI_PATH, "package.json")).version;
+			const CLI_PATH = path.join(__dirname, "node_modules", "@finsemble", "finsemble-cli");
 			const CLI_VERSION = require(path.join(CLI_PATH, "package.json")).version;
-			const CONTROLS_PATH = path.join(__dirname, "node_modules", "@chartiq", "finsemble-react-controls");
-			const CONTROLS_VERSION = require(path.join(CONTROLS_PATH, "package.json")).version;
 
 			// Check version before require so optionalDependency can stay optional
-			const FEA_VERSION = FEA_PATH_EXISTS ? require(path.join(FEA_PATH, "package.json")).version : undefined;
+			const FEA_VERSION = require(path.join(FEA_PATH, "package.json")).version;
 
 			function checkLink(params, cb) {
 				let { path, name, version } = params;
@@ -400,7 +212,7 @@ const { launch, connect } = require('hadouken-js-adapter');
 						if (str) {
 							logToTerminal(`LINK DETECTED: ${name}. @Version ${version} Path: ${str}.`, "yellow");
 						} else {
-							logToTerminal(`Using: @chartiq/${name} @Version ${version}`, "magenta");
+							logToTerminal(`Using: @finsemble/${name} @Version ${version}`, "magenta");
 						}
 						cb();
 					});
@@ -408,125 +220,113 @@ const { launch, connect } = require('hadouken-js-adapter');
 					logToTerminal(`MISSING FINSEMBLE DEPENDENCY!: ${name}.\nPath: ${path}`, "red");
 					process.exit(1);
 				}
-			};
-			async.parallel([
-				(cb) => {
-					checkLink({
-						path: FINSEMBLE_PATH,
-						name: "finsemble",
-						version: FINSEMBLE_VERSION
-					}, cb)
-				},
-				(cb) => {
-					checkLink({
-						path: CLI_PATH,
-						name: "finsemble-cli",
-						version: CLI_VERSION
-					}, cb)
-				},
-				(cb) => {
-					checkLink({
-						path: CONTROLS_PATH,
-						name: "finsemble-react-controls",
-						version: CONTROLS_VERSION
-					}, cb)
-				},
-				(cb) => {
-					if (!FEA_VERSION) {
-						// electron not found so skip check
-						return cb();
-					}
+			}
+			async.parallel(
+				[
+					(cb) => {
+						checkLink(
+							{
+								path: FINSEMBLE_PATH,
+								name: "finsemble",
+								version: FINSEMBLE_VERSION,
+							},
+							cb
+						);
+					},
+					(cb) => {
+						checkLink(
+							{
+								path: CLI_PATH,
+								name: "finsemble-cli",
+								version: CLI_VERSION,
+							},
+							cb
+						);
+					},
+					(cb) => {
+						checkLink(
+							{
+								path: FINSEMBLE_UI_PATH,
+								name: "finsemble-ui",
+								version: FINSEMBLE_UI_VERSION,
+							},
+							cb
+						);
+					},
+					(cb) => {
+						if (!FEA_VERSION) {
+							// electron not found so skip check
+							return cb();
+						}
 
-					checkLink({
-						path: FEA_PATH,
-						name: "finsemble-electron-adapter",
-						version: FEA_VERSION
-					}, cb)
-				}
-			], done)
+						checkLink(
+							{
+								path: FEA_PATH,
+								name: "finsemble-electron-adapter",
+								version: FEA_VERSION,
+							},
+							cb
+						);
+					},
+				],
+				done
+			);
 		},
 
 		/**
 		 * Builds the application, starts the server, launches the Finsemble application and watches for file changes.
 		 */
-		"dev": done => {
-			async.series([
-				taskMethods["build:dev"],
-				taskMethods.startServer,
-				taskMethods.launchApplication
-			], done);
+		dev: (done) => {
+			async.series([taskMethods["build:dev"], taskMethods.startServer, taskMethods.launchApplication], done);
 		},
 		/**
 		 * Wipes the babel cache and webpack cache, clears dist, rebuilds the application, and starts the server.
 		 */
-		"dev:fresh": done => {
-			async.series([
-				taskMethods.setDevEnvironment,
-				taskMethods.rebuild,
-				taskMethods.startServer,
-				taskMethods.launchApplication
-			], done);
+		"dev:fresh": (done) => {
+			async.series(
+				[taskMethods.setDevEnvironment, taskMethods.rebuild, taskMethods.startServer, taskMethods.launchApplication],
+				done
+			);
 		},
 		/**
-		 * Builds the application and runs the server *without* launching openfin.
+		 * Builds the application and runs the server *without* launching.
 		 */
-		"dev:noLaunch": done => {
-			async.series([
-				taskMethods["build:dev"],
-				taskMethods.startServer
-			], done);
+		"dev:noLaunch": (done) => {
+			async.series([taskMethods["build:dev"], taskMethods.startServer], done);
 		},
-		launchOpenFin: async (done) => {
-			// We are unable to read OpenFin version at the moment.
-			// We request it after hadouken connection.
-			logToTerminal("Using Container: OpenFin", "green");
-			ON_DEATH(() => {
-				killApp("OpenFin", () => {
-					if (watchClose) watchClose();
-					process.exit();
-				});
-			});
-			try {
-				const manifestUrl = taskMethods.startupConfig[env.NODE_ENV].serverConfig;
-				// Once the server is running we can launch OpenFin and retrieve the port.
-				const port = await launch({ manifestUrl });
-				// Use the port to connect and determine when OpenFin exists.
-				const fin = await connect({
-					uuid: 'server-connection',
-					// Connect to the given port.
-					address: `ws://localhost:${port}`,
-					// We want OpenFin to exit as our application exists.
-					nonPersistent: true
-				});
-				const openfinVersion = await fin.System.getVersion();
-				logToTerminal(`Openfin version: ${openfinVersion}`, "green");
-				if (watchClose) watchClose();
-				// Once OpenFin exits we shut down the server.
-				fin.once('disconnected', process.exit);
-			} catch (error) {
-				console.error(`Unable to launch and connect to OpenFin: ${error.message}`);
-				process.exit();
-			}
 
-			if (done) done();
-		},
-		launchElectron: done => {
-			logToTerminal(`Using Container: Electron@${getElectronVersion()}`, "green");
+		launchElectron: (done) => {
 			const cfg = taskMethods.startupConfig[env.NODE_ENV];
-			const USING_ELECTRON = container === "electron";
-			if (USING_ELECTRON && !FEA_PATH_EXISTS) {
-				throw "Cannot use electron container unless finsemble-electron-adapter optional dependency is installed. Please run npm i @chartiq/finsemble-electron-adapter";
-			}
 
+			/**
+			 * handleElectronClose() gets called when Electron is closed, in other words when the user quits Finsemble from the file menu or some other way.
+			 * When Electron is closed, we will want to terminate this gulp process, and also make certain that any other child
+			 * processes that we've spun up are closed (such as server.js or watch processes).
+			 *
+			 * On Unix (Mac) child processes are not automatically killed when the current process exits, so we use "treeKill"
+			 * to ensure that all child processes are killed off. Otherwise, those processes would show up as stray "node" processes in ActivityMonitor/ps
+			 * and eventually eat up memory.
+			 *
+			 * treeKill makes use of shell commands (taskkill and pgrep) because Node doesn't currently support the concept of process groups.
+			 * The result is that this gulp process will terminate with an error that _isn't really_ an error, which yarn/npm will pick up and print out "Command failed with exit code 1".
+			 * Orchestrating a graceful exit to avoid that error would involve rearchitecting the entire gulp process or forking treeKill, so on Unix/Mac we allow the spurious error.
+			 */
+			const handleElectronClose = () => {
+				if (isMacOrNix) treeKill(process.pid);
+				else process.exit(0);
+			};
+
+			const socketCertificatePath = deriveSocketCertificatePaths();
 			let config = {
 				manifest: cfg.serverConfig,
-				onElectronClose: process.exit,
+				onElectronClose: handleElectronClose,
 				chromiumFlags: JSON.stringify(cfg.chromiumFlags),
-				path: FEA_PATH,
-			}
+				socketCertificatePath,
+				breakpointOnStart: cfg.breakpointOnStart,
+			};
 
-			// set breakpointOnStart variable so FEA knows whether to pause initial code execution
-			process.env.breakpointOnStart = cfg.breakpointOnStart;
+			// Copy any command line args from server-environment-startup.json
+			config.args = taskMethods.startupConfig[env.NODE_ENV]["args"];
 
 			if (!FEA) {
 				console.error("Could not launch ");
@@ -538,7 +338,7 @@ const { launch, connect } = require('hadouken-js-adapter');
 		makeInstaller: async (done) => {
 			if (!env.NODE_ENV) throw new Error("NODE_ENV must be set to generate an installer.");
 			function resolveRelativePaths(obj, properties, rootPath) {
-				properties.forEach(prop => {
+				properties.forEach((prop) => {
 					obj[prop] = path.resolve(rootPath, obj[prop]);
 				});
 				return obj;
@@ -546,28 +346,63 @@ const { launch, connect } = require('hadouken-js-adapter');
 
 			// Inline require because this file is so large, it reduces the amount of scrolling the user has to do.
 			let installerConfig = require("./configs/other/installer.json");
+			let seedpackagejson = require("./package.json");
+			// Command line overrides
+
+			installerConfig.name = process.env.installername || installerConfig.name;
+			installerConfig.version = process.env.installerversion || installerConfig.version || seedpackagejson.version;
+			installerConfig.authors = process.env.installerauthors || installerConfig.authors;
+			installerConfig.description = process.env.installerdescription || installerConfig.description;
+
+			//check if we have an installer config matching the environment name, if not assume we just have a single config for all environments
+			if (installerConfig[env.NODE_ENV]) {
+				installerConfig = installerConfig[env.NODE_ENV];
+			}
+
+			if (installerConfig.certificateFile && !installerConfig.certificatePassword) {
+				const certPassphraseFromEnv = process.env[INSTALLER_CERT_PASS];
+
+				//If a certificate file is provided and a plain text password is not, look for environment variable
+				if (certPassphraseFromEnv) {
+					installerConfig.certificatePassword = certPassphraseFromEnv.trim();
+				} else {
+					// If a certificate file was provided and a password can't be found, show error and exit
+					throw new Error(
+						`A certificate file was provided but a password cannot be found. Please provide one in the config or as an environment variable: INSTALLER_CERTIFICATE_PASSPHRASE`
+					);
+				}
+			}
 
 			// need absolute paths for certain installer configs
-			installerConfig = resolveRelativePaths(installerConfig, ['icon'], './');
+			installerConfig = resolveRelativePaths(installerConfig, ["icon", "macIcon", "background"], "./");
 
-			const manifestUrl = taskMethods.startupConfig[env.NODE_ENV].serverConfig;
-			let updateUrl = taskMethods.startupConfig[env.NODE_ENV].updateUrl;
-			const chromiumFlags = taskMethods.startupConfig[env.NODE_ENV].chromiumFlags;
+			const manifestUrl = process.env.manifesturl || taskMethods.startupConfig[env.NODE_ENV].serverConfig;
+			console.log("The manifest location is: ", manifestUrl);
+			let { updateUrl } = taskMethods.startupConfig[env.NODE_ENV];
+			const { chromiumFlags } = taskMethods.startupConfig[env.NODE_ENV];
 
 			// Installer won't work without a proper manifest. Throw a helpful error.
 			if (!manifestUrl) {
-				throw new Error(`Installer misconfigured. No property in 'serverConfig' in configs/other/server-environment-startup.json under ${env.NODE_ENV}. This is required in order to generate the proper config.`)
+				throw new Error(
+					`Installer misconfigured. No property in 'serverConfig' in configs/other/server-environment-startup.json under ${env.NODE_ENV}. This is required in order to generate the proper config.`
+				);
 			}
 
 			// If an installer is pointing to localhost, it's likely an error. Let the dev know with a helpful error.
 			if (manifestUrl.includes("localhost")) {
-				logToTerminal(`>>>> WARNING: Installer is pointing to a manifest hosted at ${manifestUrl}. Was this accidental?
-				NODE_ENV: ${env.NODE_ENV}`, "yellow");
+				logToTerminal(
+					`>>>> WARNING: Installer is pointing to a manifest hosted at ${manifestUrl}. Was this accidental?
+				NODE_ENV: ${env.NODE_ENV}`,
+					"yellow"
+				);
 			}
 
 			// UpdateURL isn't required, but we let them know in case they're expecting it to work.
 			if (!updateUrl) {
-				logToTerminal(`[Info] Did not find 'updateUrl' in configs/other/server-environment-startup.json under ${env.NODE_ENV}. The application will still work, but it will not update itself with new versions of the finsemble-electron-adapter.`, "white");
+				logToTerminal(
+					`[Info] Did not find 'updateUrl' in configs/other/server-environment-startup.json under ${env.NODE_ENV}. The application will still work, but it will not update itself with new versions of the finsemble-electron-adapter.`,
+					"white"
+				);
 				updateUrl = null;
 			}
 
@@ -575,42 +410,30 @@ const { launch, connect } = require('hadouken-js-adapter');
 				console.error("Cannot create installer because Finsemble Electron Adapter is not installed");
 				process.exit(1);
 			}
+			const socketCertificatePath = deriveSocketCertificatePaths();
 
 			FEAPackager.setFeaPath(FEA_PATH);
 			await FEAPackager.setApplicationFolderName(installerConfig.name);
 			await FEAPackager.setManifestURL(manifestUrl);
 			await FEAPackager.setUpdateURL(updateUrl);
 			await FEAPackager.setChromiumFlags(chromiumFlags || {});
+			await FEAPackager.copySocketCertificates(socketCertificatePath);
 			await FEAPackager.createFullInstaller(installerConfig);
 			done();
 		},
-		launchApplication: done => {
-			if (!isNodeVersionValid()) {
-				logToTerminal(`Node version: ${process.version} is not supported. Max supported version: ${MAX_NODE_VERSION}`, "red");
-			}
+		launchApplication: (done) => {
 			logToTerminal("Launching Finsemble", "black", "bgCyan");
 
 			launchTimestamp = Date.now();
-			if (container === "openfin") {
-				taskMethods.launchOpenFin(done);
-			} else {
-				taskMethods.launchElectron(done);
-			}
+			taskMethods.launchElectron(done);
 		},
-
 		logToTerminal: (...args) => logToTerminal.apply(this, args),
-
 		envOrArg: (...args) => envOrArg.apply(this, args),
-
 		/**
 		 * Starts the server, launches the Finsemble application. Use this for a quick launch, for instance when working on finsemble-electron-adapter.
 		 */
-		"nobuild:dev": done => {
-			async.series([
-				taskMethods.setDevEnvironment,
-				taskMethods.startServer,
-				taskMethods.launchApplication
-			], done);
+		"nobuild:dev": (done) => {
+			async.series([taskMethods.setDevEnvironment, taskMethods.startServer, taskMethods.launchApplication], done);
 		},
 
 		/**
@@ -618,67 +441,55 @@ const { launch, connect } = require('hadouken-js-adapter');
 		 * @param done Callback function used to signal function completion to support asynchronous execution. Can
 		 * optionally return an error, if one occurs.
 		 */
-		post: done => { done(); },
+		post: (done) => {
+			done();
+		},
 
 		/**
 		 * Method called before tasks are defined.
 		 * @param done Callback function used to signal function completion to support asynchronous execution. Can
 		 * optionally return an error, if one occurs.
 		 */
-		pre: done => {
-			taskMethods.checkSymbolicLinks();
+		pre: (done) => {
+			// taskMethods.checkSymbolicLinks();
 			done();
 		},
-
-		/**
-		 * Builds the application, starts the server and launches openfin. Use this to test production mode on your local machine.
-		 */
-		prod: done => {
-			async.series([
-				taskMethods["build:prod"],
-				taskMethods.startServer,
-				taskMethods.launchApplication
-			], done);
+		launch: (done) => {
+			async.series([taskMethods.launchApplication], done);
 		},
 		/**
-		 * Builds the application in production mode and starts the server without launching openfin.
+		 * Builds the application, starts the server and launches the application. Use this to test production mode on your local machine.
 		 */
-		"prod:nolaunch": done => {
-			async.series([
-				taskMethods["build:prod"],
-				taskMethods.startServer
-			], done);
-		},
-		rebuild: done => {
-			async.series([
-				taskMethods.clean,
-				taskMethods.build
-			], done);
+		prod: (done) => {
+			async.series([taskMethods["build:prod"], taskMethods.startServer, taskMethods.launchApplication], done);
 		},
 		/**
-		 * Launches the server in dev environment. No build, no openfin launch.
+		 * Builds the application in production mode and starts the server without launching the application.
 		 */
-		server: done => {
-			async.series([
-				taskMethods.setDevEnvironment,
-				taskMethods.startServer
-			], done);
+		"prod:nolaunch": (done) => {
+			async.series([taskMethods["build:prod"], taskMethods.startServer], done);
+		},
+		rebuild: (done) => {
+			async.series([taskMethods.clean, taskMethods.build], done);
 		},
 		/**
-		 * Launches the server in prod environment. No build, no openfin launch.
+		 * Launches the server in dev environment. No build, no application launch.
 		 */
-		"server:prod": done => {
-			async.series([
-				taskMethods.setProdEnvironment,
-				taskMethods.startServer
-			], done);
+		server: (done) => {
+			async.series([taskMethods.setDevEnvironment, taskMethods.startServer], done);
+		},
+		/**
+		 * Launches the server in prod environment. No build, no application launch.
+		 */
+		"server:prod": (done) => {
+			async.series([taskMethods.setProdEnvironment, taskMethods.startServer], done);
 		},
 		/**
 		 * Starts the server.
 		 *
 		 * @param {function} done Function called when execution has completed.
 		 */
-		startServer: done => {
+		startServer: (done) => {
 			const serverPath = path.join(__dirname, "server", "server.js");
 
 			serverProcess = spawn(
@@ -686,21 +497,16 @@ const { launch, connect } = require('hadouken-js-adapter');
 				[
 					serverPath,
 					{
-						stdio: "inherit"
-					}
+						stdio: "inherit",
+					},
 				],
 				{
 					env: env,
-					stdio: [
-						process.stdin,
-						process.stdout,
-						"pipe",
-						"ipc"
-					]
+					stdio: [process.stdin, process.stdout, "pipe", "ipc"],
 				}
 			);
 
-			serverProcess.on("message", data => {
+			serverProcess.on("message", (data) => {
 				if (!data || !data.action) {
 					console.log("Unproperly formatted message from server:", data);
 					return;
@@ -718,21 +524,23 @@ const { launch, connect } = require('hadouken-js-adapter');
 				}
 			});
 
-			serverProcess.on("exit", code => logToTerminal(`Server closed: exit code ${code}`, "magenta"));
+			serverProcess.on("exit", (code) => logToTerminal(`Server closed: exit code ${code}`, "magenta"));
 
 			// Prints server errors to your terminal.
-			serverProcess.stderr.on("data", data => { console.error(errorOutColor(`ERROR: ${data}`)); });
+			serverProcess.stderr.on("data", (data) => {
+				console.error(`ERROR: ${data}`);
+			});
 		},
 
-		setDevEnvironment: done => {
+		setDevEnvironment: (done) => {
 			process.env.NODE_ENV = "development";
 			done();
 		},
 
-		setProdEnvironment: done => {
+		setProdEnvironment: (done) => {
 			process.env.NODE_ENV = "production";
 			done();
-		}
+		},
 	};
 	// #endregion
 
@@ -742,9 +550,9 @@ const { launch, connect } = require('hadouken-js-adapter');
 	}
 
 	// #region Task definitions
-	const defineTasks = err => {
+	const defineTasks = (err) => {
 		if (err) {
-			console.error(errorOutColor(err));
+			console.error(err);
 			process.exit(1);
 		}
 
@@ -757,13 +565,13 @@ const { launch, connect } = require('hadouken-js-adapter');
 		// By default run dev
 		gulp.task("default", taskMethods["dev"]);
 
-		taskMethods.post(err => {
+		taskMethods.post((err) => {
 			if (err) {
-				console.error(errorOutColor(err));
+				console.error(err);
 				process.exit(1);
 			}
 		});
-	}
+	};
 	// #endregion
 
 	// Run anything that we need to do before the gulp task is run

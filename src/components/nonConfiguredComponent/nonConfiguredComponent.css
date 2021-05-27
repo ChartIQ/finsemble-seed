@@ -1,0 +1,70 @@
+@import "~@finsemble/finsemble-ui/react/assets/css/finsemble.css";
+@import url("../../../assets/css/theme.css");
+
+body {
+	margin: 0px;
+	background-color: black;
+}
+
+#container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+}
+#content {
+	font-size: 20px;
+	flex: 1;
+	text-align: center;
+}
+.spacer1 {
+	height: 50px;
+}
+
+.spacer2 {
+	height: 15px;
+}
+
+.spacer3 {
+	height: 15px;
+}
+
+.spacer4 {
+	height: 0px;
+}
+
+h1 {
+	font-family: "Open Sans", sans-serif;
+	font-weight: 300;
+}
+
+button {
+	width: 200px;
+	text-align: center !important;
+	margin: 0px auto;
+	max-width: 2000px;
+	-webkit-appearance: none;
+	background-color: #2068c3;
+	color: #fff;
+	font-family: "Open Sans", sans-serif;
+	font-weight: 400;
+	font-size: 125%;
+	border: 0px;
+	border-radius: 3px;
+	padding: 10px 15px;
+	vertical-align: middle;
+	transition: all 0.2s ease;
+}
+button:hover {
+	background-color: #039bff;
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+#quitFS {
+	color: #ee5c5c;
+	background-color: #ffffff;
+	font-size: 100%;
+	width: 140px;
+}

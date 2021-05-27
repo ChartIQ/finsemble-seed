@@ -1,10 +1,10 @@
 {
 	"localStorageAdapter": {
 		"output": "adapters/localStorageAdapter",
-		"entry":"./src-built-in/adapters/localStorageAdapter.js"
+		"entry": "./src/adapters/localStorageAdapter.js"
 	},
 	"indexDBAdapter": {
 		"output": "adapters/indexedDBAdapter",
-		"entry":"./src-built-in/adapters/indexedDBAdapter.js"
+		"entry": "./src/adapters/indexedDBAdapter.js"
 	}
 }

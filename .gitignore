@@ -23,3 +23,5 @@ server/stats.json
 package-lock.json
 installer-tmp/
 pkg/
+pkg-development/
+pkg-production/

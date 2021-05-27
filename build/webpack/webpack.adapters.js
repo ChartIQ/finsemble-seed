@@ -1,4 +1,4 @@
-const path = require("path");
+const { generateDefaultConfig } = require("./defaultWebpackConfig");
 const adaptersToBuild = require("./webpack.adapters.entries.json");
 
 let entries = {};
@@ -7,29 +7,7 @@ for (let key in adaptersToBuild) {
 	entries[component.output] = component.entry;
 }
 
-module.exports = {
-    devtool: 'source-map',
-    entry: entries,
-    stats: "minimal",
-    module: {
-        rules: [
-            {
-                test: /\.js(x)?$/,
-                exclude: [/node_modules/, "/chartiq/"],
-                loader: 'babel-loader',
-                options: {
-                    cacheDirectory: './.babel_cache/',
-                    presets: ['react', 'stage-1']
-                }
-            }
-        ]
-    },
-    output: {
-        filename: "[name].js",
-        sourceMapFilename: "[name].map.js",
-        path: path.resolve(__dirname, '../../dist/')
-    },
-    resolve: {
-        extensions: ['.js', '.jsx', '.json', 'scss', 'html']
-    },
-};
+let webpackConfig = generateDefaultConfig();
+webpackConfig.entry = entries;
+
+module.exports = webpackConfig;

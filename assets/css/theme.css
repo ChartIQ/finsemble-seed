@@ -1,0 +1,45 @@
+/**
+`theme.css` is imported into all of Finsemble's UI components. It is the very last piece of CSS
+that is imported, which means that any CSS in this file will *override* Finsemble's default CSS.
+
+See https://documentation.chartiq.com/finsemble/tutorial-UIComponents.html#css
+*/
+
+:root {
+	/*
+    --core-primary: #22262f;
+
+    --core-primary-1: #171A20;
+    --core-primary-2: #373B43;
+    --core-primary-3: #3D4455;
+    --core-primary-4: #5B606F;
+    --core-primary-5: #ACB2C0;
+
+    --accent-primary: #0A8CF4;
+    --accent-primary-1: #087DDB;
+    --accent-primary-2: #398BFF;
+
+    --accent-positive: #2CC13F;
+    --accent-positive-1: #27AE38;
+
+    --accent-aware: #F5A623;
+    --accent-aware-1: #DC951F;
+
+    --accent-negative: #F26666;
+    --accent-negative-1: #DA5C5C;
+
+    --scrollbar-color: white;
+
+    --font-family: "OpenSans", sans-serif;
+
+    --font-color: white;
+    --font-color-1: var(--core-primary-5);
+    --font-color-2: black;
+
+    --font-weight: 600;
+    --font-weight-1: 400;
+    --font-weight-2: bold;
+
+    --font-size: 12px;
+*/
+}

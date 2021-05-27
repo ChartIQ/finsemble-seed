@@ -1,8 +1,0 @@
-<svg width="20" height="16" viewBox="0 2 16 13" 
-    xmlns="http://www.w3.org/2000/svg">
-    <title>Drag To Share</title>
-        <path d="M7 3H6V1H1v12h5v-3h1v3a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v2z" fill="#8E939F"/>
-        <path d="M9 11h1v2h5V1h-5v1H9V1a1 1 0 0 1 1-1h5a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1h-5a1 1 0 0 1-1-1v-2z" fill="#ECEDEF"/>
-        <rect fill="#ECEDEF" x="4" y="6" width="8" height="1" rx=".5"/>
-        <path stroke="#ECEDEF" strokeLinecap="round" stroke-linejoin="round" d="M9 9l2.755-2.348L9 4.128"/>
-</svg>

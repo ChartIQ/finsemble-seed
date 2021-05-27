@@ -1,1 +1,6 @@
-{}
+{
+    "launchGroupSpawner": {
+        "output": "components/launchGroupSpawner/launchGroupSpawner",
+        "entry": "./src/components/launchGroupSpawner/launchGroupSpawner.js"
+    }
+}

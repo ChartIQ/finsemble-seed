@@ -1,179 +1,11 @@
 {
 	"comment": "Sample component config, including app launcher, menus, etc.",
+	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/uiComponentsFile.schema.json",
 	"components": {
-		"App Launcher": {
-			"window": {
-				"url": "$applicationRoot/components/appLauncher/appLauncher.html",
-				"affinity": "systemComponents",
-				"top": 0,
-				"left": 0,
-				"width": 310,
-				"height": 400,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"allowQuickComponent": "@TODO",
-				"spawnOnStartup": false,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"Window Manager": {
-						"persistWindowState": false,
-						"FSBLHeader": false
-					}
-				}
-			}
-		},
-		"Advanced App Launcher": {
-			"window": {
-				"url": "$applicationRoot/components/advancedAppLauncher/index.html",
-				"top": 0,
-				"left": 0,
-				"width": 700,
-				"height": 467,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"allowQuickComponent": "@TODO",
-				"spawnOnStartup": false,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"Window Manager": {
-						"persistWindowState": false,
-						"FSBLHeader": false,
-						"title": "Advanced App Launcher"
-					}
-				}
-			}
-		},
-		"searchMenu": {
-			"window": {
-				"url": "$applicationRoot/components/searchMenu/searchMenu.html",
-				"affinity": "systemComponents",
-				"top": 32,
-				"left": 45,
-				"width": 350,
-				"height": 330,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"allowQuickComponent": "@TODO",
-				"spawnOnStartup": false,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"Window Manager": {
-						"persistWindowState": false,
-						"FSBLHeader": false
-					}
-				}
-			}
-		},
-		"Overflow Menu": {
-			"window": {
-				"url": "$applicationRoot/components/overflowMenu/overflowMenu.html",
-				"affinity": "systemComponents",
-				"top": 32,
-				"left": 45,
-				"width": 350,
-				"height": 330,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"allowQuickComponent": "@TODO",
-				"spawnOnStartup": false,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"Window Manager": {
-						"persistWindowState": false,
-						"FSBLHeader": false
-					}
-				}
-			}
-		},
-		"Workspace Management Menu": {
-			"window": {
-				"url": "$applicationRoot/components/workspaceManagementMenu/workspaceManagementMenu.html",
-				"affinity": "systemComponents",
-				"top": 32,
-				"left": 45,
-				"width": 310,
-				"height": 330,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"spawnOnStartup": false,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": false
-					},
-					"Window Manager": {
-						"FSBLHeader": false,
-						"persistWindowState": false
-					}
-				}
-			}
-		},
 		"linkerWindow": {
 			"bootParams": {
 				"stage": "earlyuser",
-				"dependencies": [
-					"Toolbar"
-				]
+				"dependencies": ["Toolbar"]
 			},
 			"window": {
 				"url": "$applicationRoot/components/linker/linker.html",
@@ -188,87 +20,6 @@
 			},
 			"component": {
 				"spawnOnStartup": true,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": false
-					},
-					"Window Manager": {
-						"FSBLHeader": false,
-						"persistWindowState": false
-					}
-				}
-			}
-		},
-		"File Menu": {
-			"window": {
-				"url": "$applicationRoot/components/fileMenu/fileMenu.html?",
-				"top": 0,
-				"left": 100,
-				"width": 125,
-				"height": 80,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"title": "@TODO",
-				"menuItems": [
-					"@TODO config not yet implemented",
-					{
-						"label": "Documentation",
-						"url": "https://documentation.chartiq.com/finsemble"
-					},
-					{
-						"label": "Quit",
-						"method": "quitApplication"
-					}
-				],
-				"spawnOnStartup": false,
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": false
-					},
-					"Window Manager": {
-						"FSBLHeader": false,
-						"persistWindowState": false
-					}
-				}
-			}
-		},
-		"Window Context Menu": {
-			"window": {
-				"url": "$applicationRoot/components/windowContextMenu/windowContextMenu.html",
-				"affinity": "systemComponents",
-				"top": 0,
-				"left": 100,
-				"width": 125,
-				"height": 80,
-				"ephemeral": true,
-				"options": {
-					"autoShow": false
-				}
-			},
-			"component": {
-				"spawnOnStartup": false,
 				"category": "system"
 			},
 			"foreign": {
@@ -359,9 +110,7 @@
 		"yesNo": {
 			"bootParams": {
 				"stage": "earlyuser",
-				"dependencies": [
-					"Toolbar"
-				]
+				"dependencies": ["Toolbar"]
 			},
 			"window": {
 				"url": "$applicationRoot/components/yesNoDialog/yesNoDialog.html",
@@ -407,9 +156,7 @@
 		"singleInput": {
 			"bootParams": {
 				"stage": "earlyuser",
-				"dependencies": [
-					"Toolbar"
-				]
+				"dependencies": ["Toolbar"]
 			},
 			"window": {
 				"url": "$applicationRoot/components/singleInputDialog/singleInputDialog.html",
@@ -428,48 +175,6 @@
 			"component": {
 				"category": "system",
 				"spawnOnStartup": true
-			},
-			"foreign": {
-				"clients": {
-					"dialogManager": {
-						"isDialog": true
-					}
-				},
-				"services": {
-					"windowService": {
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": false
-					},
-					"Window Manager": {
-						"FSBLHeader": false,
-						"persistWindowState": false
-					}
-				}
-			}
-		},
-		"inputAndSelection": {
-			"window": {
-				"url": "$applicationRoot/components/inputAndSelectionDialog/inputAndSelectionDialog.html",
-				"affinity": "systemComponents",
-				"width": 587,
-				"height": 358,
-				"position": "absolute",
-				"top": "center",
-				"left": "center",
-				"options": {
-					"resizable": false,
-					"autoShow": false,
-					"alwaysOnTop": true
-				}
-			},
-			"component": {
-				"category": "system",
-				"spawnOnStartup": false
 			},
 			"foreign": {
 				"clients": {
@@ -535,41 +240,7 @@
 			"bootParams": {
 				"stage": "earlyuser",
 				"checkpoints": {
-					"searchStoreInit": {
-						"postStartupCompletion": true,
-						"timeout": 30000
-					},
-					"createStores": {
-						"postStartupCompletion": true
-					},
-					"loadMenusFromConfig": {
-						"dependencies": [
-							"createStores"
-						],
-						"postStartupCompletion": true
-					},
-					"addListeners": {
-						"dependencies": [
-							"loadMenusFromConfig"
-						],
-						"postStartupCompletion": true
-					},
-					"setupHotkeys": {
-						"dependencies": [
-							"addListeners"
-						],
-						"postStartupCompletion": true
-					},
-					"listenForWorkspaceUpdates": {
-						"dependencies": [
-							"setupHotkeys"
-						],
-						"postStartupCompletion": true
-					},
-					"addMoreListeners": {
-						"dependencies": [
-							"listenForWorkspaceUpdates"
-						],
+					"initialize": {
 						"postStartupCompletion": true
 					}
 				}
@@ -585,19 +256,16 @@
 				"left": 0,
 				"right": 0,
 				"position": "available",
-				"dockable": [
-					"top",
-					"bottom"
-				],
+				"dockable": ["top", "bottom"],
 				"maxHeight": 39,
 				"minHeight": 39,
 				"minWidth": 300,
 				"docked": "top",
 				"canGroup": false,
 				"options": {
-					"autoShow": false,
+					"autoShow": true,
 					"contextMenu": false,
-					"showTaskbarIcon": false,
+					"showTaskbarIcon": true,
 					"smallWindow": true,
 					"maximizable": false
 				}
@@ -613,8 +281,9 @@
 				"services": {
 					"windowService": {
 						"allowAutoArrange": false,
-						"ignoreSnappingRequests": true,
-						"ignoreTilingAndTabbingRequests": true
+						"allowSnapping": false,
+						"allowTabbing": false,
+						"allowTiling": false
 					},
 					"workspaceService": {
 						"global": true
@@ -629,12 +298,36 @@
 						"FSBLHeader": false
 					}
 				}
+			},
+			"childWindowOptions": {
+				"window": {
+					"resizable": false,
+					"maxHeight": null,
+					"minHeight": null,
+					"dockable": false,
+					"show": false
+				},
+				"foreign": {
+					"components": {
+						"Window Manager": {
+							"FSBLHeader": false
+						}
+					},
+					"services": {
+						"windowService": {
+							"manageWindowMovement": false
+						},
+						"workspaceService": {
+							"addToWorkspace": false
+						}
+					}
+				}
 			}
 		},
 		"windowTitleBar": {
 			"window": {
 				"//": "This is never called as a component. It is compiled to js and then injected into other components",
-				"url": "$applicationRoot/components/windowTitleBar/windowTitleBar.js",
+				"url": "$applicationRoot/components/windowTitleBar/WindowTitleBar.js",
 				"top": "center",
 				"left": "center",
 				"width": 358,
@@ -664,9 +357,7 @@
 		"UserPreferences": {
 			"bootParams": {
 				"stage": "earlyuser",
-				"dependencies": [
-					"Toolbar"
-				]
+				"dependencies": ["Toolbar"]
 			},
 			"window": {
 				"url": "$applicationRoot/components/userPreferences/userPreferences.html",
@@ -708,51 +399,6 @@
 				}
 			}
 		},
-		"Floating Titlebar": {
-			"window": {
-				"url": "$applicationRoot/components/floatingTitlebar/floatingTitlebar.html",
-				"affinity": "systemComponents",
-				"frame": false,
-				"top": "center",
-				"left": "center",
-				"width": 30,
-				"height": 30,
-				"options": {
-					"cornerRounding": {
-						"height": 0,
-						"width": 0
-					},
-					"showTaskbarIcon": false,
-					"autoShow": false,
-					"resizable": false,
-					"alwaysOnTop": false,
-					"smallWindow": true
-				}
-			},
-			"component": {
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowGrouping": true,
-						"allowAutoArrange": false
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": false
-					},
-					"Window Manager": {
-						"FSBLHeader": false,
-						"persistWindowState": false
-					},
-					"Toolbar": {
-						"iconClass": "UserPreferences"
-					}
-				}
-			}
-		},
 		"Process Monitor": {
 			"window": {
 				"url": "$applicationRoot/components/processMonitor/processMonitor.html",
@@ -781,49 +427,9 @@
 				}
 			}
 		},
-		"App Catalog": {
-			"window": {
-				"url": "$applicationRoot/components/appCatalog/appCatalog.html",
-				"affinity": "systemComponents",
-				"frame": false,
-				"top": "center",
-				"left": "center",
-				"width": 800,
-				"height": 600,
-				"options": {
-					"autoShow": true,
-					"resizable": false,
-					"alwaysOnTop": true
-				}
-			},
-			"component": {
-				"category": "system"
-			},
-			"foreign": {
-				"services": {
-					"windowService": {
-						"allowGrouping": false,
-						"allowAutoArrange": false,
-						"shouldRegister": false
-					}
-				},
-				"components": {
-					"App Launcher": {
-						"launchableByUser": false
-					},
-					"Window Manager": {
-						"FSBLHeader": false,
-						"persistWindowState": false
-					},
-					"Toolbar": {
-						"iconClass": "UserPreferences"
-					}
-				}
-			}
-		},
 		"Advanced App Catalog": {
 			"window": {
-				"url": "$applicationRoot/components/advancedAppCatalog/appCatalog.html",
+				"url": "$applicationRoot/components/appCatalog/appCatalog.html",
 				"affinity": "systemComponents",
 				"width": 600,
 				"height": 700,
@@ -835,7 +441,8 @@
 			},
 			"component": {
 				"category": "system",
-				"spawnOnStartup": false
+				"spawnOnStartup": false,
+				"canMaximize": false
 			},
 			"foreign": {
 				"services": {
@@ -857,6 +464,173 @@
 						"persistWindowState": true,
 						"showTabs": false,
 						"title": "App Catalog"
+					}
+				}
+			}
+		},
+		"SystemTrayComponent": {
+			"bootParams": {
+				"stage": "earlyuser",
+				"dependencies": ["Toolbar"]
+			},
+			"window": {
+				"url": "$applicationRoot/components/systemTrayComponent/systemTrayComponent.html",
+				"affinity": "systemComponents",
+				"width": 150,
+				"height": 40,
+				"options": {
+					"autoShow": false,
+					"resizable": false,
+					"alwaysOnTop": true
+				}
+			},
+			"component": {
+				"category": "system",
+				"spawnOnStartup": true
+			},
+			"foreign": {
+				"services": {
+					"windowService": {
+						"allowGrouping": false,
+						"allowAutoArrange": false,
+						"shouldRegister": false
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					},
+					"Window Manager": {
+						"FSBLHeader": false,
+						"persistWindowState": true
+					}
+				}
+			}
+		},
+		"NotificationsCenter": {
+			"bootParams": {
+				"stage": "earlyuser",
+				"dependencies": ["Toolbar"]
+			},
+			"window": {
+				"url": "$applicationRoot/components/notificationsCenter/notificationsCenter.html",
+				"forceOntoMonitor": true,
+				"top": 0,
+				"right": 0,
+				"width": 428,
+				"maxWidth": 428,
+				"minWidth": 428,
+				"height": "100%",
+				"position": "available",
+				"monitor": "primary",
+				"addToWorkspace": false,
+				"options": {
+					"transparent": false,
+					"alwaysOnTop": true,
+					"autoShow": false,
+					"resizable": true,
+					"showTaskbarIcon": false,
+					"maximizable": false,
+					"isEvergreen": false
+				},
+				"data": {
+					"notifications": {
+						"applyMuteFilters": false,
+						"notificationsHistory": true
+					}
+				}
+			},
+			"component": {
+				"preload": false,
+				"spawnOnStartup": true,
+				"singleton": true,
+				"category": "system",
+				"canMaximize": false
+			},
+			"foreign": {
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					},
+					"Window Manager": {
+						"title": "notification-center",
+						"FSBLHeader": {
+							"hideMaximize": true,
+							"hideClose": false,
+							"hideMinimize": true
+						},
+						"disableBrowserView": true
+					},
+					"Toolbar": {
+						"iconClass": "notification-center"
+					}
+				},
+				"services": {
+					"windowService": {
+						"allowAutoArrange": false,
+						"allowSnapping": false,
+						"allowTabbing": false,
+						"allowTiling": false,
+						"allowGrouping": false,
+						"allowMinimize": false
+					}
+				}
+			}
+		},
+		"NotificationsToasts": {
+			"bootParams": {
+				"stage": "earlyuser",
+				"dependencies": ["Toolbar"]
+			},
+			"window": {
+				"name": "notifications-toasts",
+				"url": "$applicationRoot/components/notificationsToasts/notificationsToasts.html",
+				"options": {
+					"transparent": false,
+					"alwaysOnTop": true,
+					"autoShow": false,
+					"resizable": false,
+					"showTaskbarIcon": false
+				},
+				"forceOntoMonitor": true,
+				"top": 0,
+				"right": 0,
+				"width": 428,
+				"height": "100%",
+				"position": "available",
+				"data": {
+					"notifications": {
+						"applyMuteFilters": true
+					}
+				}
+			},
+			"component": {
+				"preload": false,
+				"spawnOnStartup": true,
+				"singleton": true,
+				"category": "system"
+			},
+			"foreign": {
+				"services": {
+					"windowService": {
+						"manageWindowMovement": true,
+						"allowAutoArrange": false,
+						"allowSnapping": false,
+						"allowTabbing": false,
+						"allowTiling": false,
+						"allowGrouping": false,
+						"allowMinimize": false
+					},
+					"workspace": {}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					},
+					"Window Manager": {
+						"FSBLHeader": false,
+						"title": "NotificationsToasts",
+						"persistWindowState": true
 					}
 				}
 			}

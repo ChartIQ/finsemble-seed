@@ -1,86 +1,54 @@
 {
-	"appLauncher": {
-		"output": "components/appLauncher/appLauncher",
-		"entry": "./src-built-in/components/appLauncher/src/app.jsx"
-	},
-	"advancedAppLauncher": {
-		"output": "components/advancedAppLauncher/index",
-		"entry": "./src-built-in/components/advancedAppLauncher/src/index.jsx"
-	},
 	"authentication": {
-		"output": "components/authentication/authentication",
-		"entry": "./src-built-in/components/authentication/authentication.js"
-	},
-	"overflowMenu": {
-		"output": "components/overflowMenu/overflowMenu",
-		"entry": "./src-built-in/components/overflowMenu/src/app.jsx"
+		"output": "components/authentication/Authentication",
+		"entry": "./src/components/authentication/Authentication.tsx"
 	},
 	"toolbar": {
-		"output": "components/toolbar/toolbar",
-		"entry": "./src-built-in/components/toolbar/src/app.jsx"
+		"output": "components/toolbar/Toolbar",
+		"entry": "./src/components/toolbar/src/Toolbar.tsx"
 	},
 	"linker": {
-		"output": "components/linker/linker",
-		"entry": "./src-built-in/components/linker/src/linker.jsx"
-	},
-	"workspaceManagementMenu": {
-		"output": "components/workspaceManagementMenu/workspaceManagementMenu",
-		"entry": "./src-built-in/components/workspaceManagementMenu/src/app.jsx"
-	},
-	"fileMenu": {
-		"output": "components/fileMenu/fileMenu",
-		"entry": "./src-built-in/components/fileMenu/src/app.jsx"
+		"output": "components/linker/Linker",
+		"entry": "./src/components/linker/Linker.tsx"
 	},
 	"quickComponentForm": {
-		"output": "components/quickComponentForm/quickComponentForm",
-		"entry": "./src-built-in/components/quickComponentForm/app.jsx"
+		"output": "components/quickComponentForm/QuickComponentForm",
+		"entry": "./src/components/quickComponentForm/QuickComponentForm.tsx"
 	},
 	"yesNoDialog": {
-		"output": "components/yesNoDialog/yesNoDialog",
-		"entry": "./src-built-in/components/yesNoDialog/src/app.jsx"
+		"output": "components/yesNoDialog/YesNoDialog",
+		"entry": "./src/components/yesNoDialog/YesNoDialog.tsx"
 	},
 	"singleInputDialog": {
-		"output": "components/singleInputDialog/singleInputDialog",
-		"entry": "./src-built-in/components/singleInputDialog/src/app.jsx"
+		"output": "components/singleInputDialog/SingleInputDialog",
+		"entry": "./src/components/singleInputDialog/SingleInputDialog.tsx"
 	},
 	"UserPreferences": {
-		"output": "components/userPreferences/userPreferences",
-		"entry": "./src-built-in/components/userPreferences/src/app.jsx"
-	},
-	"floatingTitlebar": {
-		"output": "components/floatingTitlebar/floatingTitlebar",
-		"entry": "./src-built-in/components/floatingTitlebar/src/app.jsx"
-	},
-	"inputAndSelectionDialog": {
-		"output": "components/inputAndSelectionDialog/inputAndSelectionDialog",
-		"entry": "./src-built-in/components/inputAndSelectionDialog/src/app.jsx"
-	},
-	"searchMenu": {
-		"output": "components/searchMenu/searchMenu",
-		"entry": "./src-built-in/components/searchMenu/src/app.jsx"
-	},
-	"welcome": {
-		"output": "components/welcome/welcome",
-		"entry": "./src-built-in/components/welcome/welcome.js"
+		"output": "components/userPreferences/UserPreferences",
+		"entry": "./src/components/userPreferences/UserPreferences.tsx"
 	},
 	"appCatalog": {
-		"output": "components/appCatalog/appCatalog",
-		"entry": "./src-built-in/components/appCatalog/src/app.jsx"
-	},
-	"advancedAppCatalog": {
-		"output": "components/advancedAppCatalog/appCatalog",
-		"entry": "./src-built-in/components/advancedAppCatalog/src/app.jsx"
+		"output": "components/appCatalog/AppCatalog",
+		"entry": "./src/components/appCatalog/AppCatalog.tsx"
 	},
 	"nonConfiguredComponent": {
 		"output": "components/nonConfiguredComponent/nonConfiguredComponent",
-		"entry": "./src-built-in/components/nonConfiguredComponent/nonConfiguredComponent.js"
+		"entry": "./src/components/nonConfiguredComponent/nonConfiguredComponent.js"
 	},
 	"processMonitor": {
-		"output": "components/processMonitor/processMonitor",
-		"entry": "./src-built-in/components/processMonitor/src/app.jsx"
+		"output": "components/processMonitor/ProcessMonitor",
+		"entry": "./src/components/processMonitor/ProcessMonitor.tsx"
 	},
-	"throbber": {
-		"output": "components/throbber/throbber",
-		"entry": "./src-built-in/components/throbber/throbber.js"
+	"systemTrayComponent": {
+		"output": "components/systemTrayComponent/SystemTrayComponent",
+		"entry": "./src/components/systemTrayComponent/SystemTrayComponent.tsx"
+	},
+	"NotificationsCenter": {
+		"output": "components/notificationsCenter/NotificationsCenter",
+		"entry": "./src/components/notificationsCenter/NotificationsCenter.tsx"
+	},
+	"NotificationsToasts": {
+		"output": "components/notificationsToasts/NotificationsToasts",
+		"entry": "./src/components/notificationsToasts/NotificationsToasts.tsx"
 	}
 }

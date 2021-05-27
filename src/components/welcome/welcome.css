@@ -1,0 +1,64 @@
+@import url("../../assets/css/finsemble.css");
+@import url("../../assets/css/theme.css");
+
+body {
+	margin: 0px;
+	user-select: none;
+}
+
+#container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.spacer1 {
+	height: 50px;
+}
+
+.spacer2 {
+	height: 15px;
+}
+
+.spacer3 {
+	height: 15px;
+}
+
+.spacer4 {
+	height: 0px;
+}
+
+h1 {
+	font-weight: var(--font-weight-1);
+	color: var(--procMonitor-font-color);
+}
+
+button {
+	width: 200px;
+	text-align: center !important;
+	margin: 0px auto;
+	max-width: 2000px;
+	-webkit-appearance: none;
+	background-color: var(--button-affirmative-background-color);
+	color: #fff;
+	font-weight: 400;
+	font-size: 125%;
+	border: 0px;
+	border-radius: 4px;
+	padding: 10px 15px;
+	vertical-align: middle;
+	transition: all 0.2s ease;
+}
+button:hover {
+	background-color: var(--button-affirmative-background-hover-color);
+	cursor: pointer;
+	transition: all 0.2s ease;
+}
+
+#quitFS {
+	color: #ee5c5c;
+	background-color: #ffffff;
+	font-size: 100%;
+	width: 140px;
+}

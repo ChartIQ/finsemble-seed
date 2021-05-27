@@ -1,95 +1,80 @@
 {
-    "devtools_port": 9090,
-    "startup_app": {
-        "name": "ChartIQ Local",
-        "url": "http://localhost:3375/finsemble/services/systemManager/systemManager.html",
-        "uuid": "Finsemble",
-        "requireHandshake": true,
-        "applicationIcon": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png",
-        "defaultTop": 75,
-        "defaultLeft": 200,
-        "defaultHeight": 950,
-        "defaultWidth": 700,
-        "showTaskbarIcon": true,
-        "autoShow": false,
-        "frame": true,
-        "resizable": true,
-        "maximizable": false,
-        "delay_connection": true,
-        "contextMenu": true,
-        "cornerRounding": {
-            "width": 4,
-            "height": 4
-        },
-        "alwaysOnTop": false
-    },
-    "splashScreenImage": "http://localhost:3375/assets/img/FinsembleSplash.png",
-    "runtime": {
-        "arguments": "--noerrdialogs  --v=4 --no-sandbox  --framestrategy=frames --winhttp-proxy-resolver",
-        "version": "9.61.36.36",
-        "//": "Add these arguments when diagnosing issues",
-        "--enable-crash-reporting": "Adding this flag will enable crash reporting to openfin, which has caused memory leaks in some versions.",
-        "--diagnostics": "Adding this to the runtimeArguments activates verbose logging and crash reporting.",
-        "--disable-gpu": "This flag disables hardware acceleration. Try this if 'Blank Screen' issues are reported (sometimes on virtual desktops)",
-        "--winhttp-proxy-resolver": "Chromium v56 contains a bug that in some environments can create a memory leak. The bug is related to the way Chromium handles PAC files."
-    },
-    "shortcut": {
-        "company": "ChartIQ",
-        "description": "ChartIQ Local",
-        "icon": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.ico",
-        "name": "ChartIQ - LOCAL",
-        "target": [
-            "desktop",
-            "start-menu"
-        ],
-        "force": false,
-        "startMenuRootFolder": "ChartIQ Local"
-    },
-    "dialogSettings": {
-        "logo": "http://localhost:3375/assets/img/ciq-banner-100x25.png",
-        "bgColor": 4280109424,
-        "textColor": 4293521652,
-        "progressBarBgColor": 4294967295,
-        "progressBarFillColor": 4282684881,
-        "progressBarBorderColor": 4293521652
-    },
-    "supportInformation": {
-        "company": "ChartIQ",
-        "product": "Finsemble Local Demo",
-        "email": "finsemble@chartiq.com"
-    },
-    "fileName": "ChartIQ-local-installer",
-    "appAssets": [
-        {
-            "src": "https://assets.finsemble.com/assimilation/assimilation_4.0.0.0.zip",
-            "version": "4.0.0",
-            "alias": "assimilation",
-            "target": "AssimilationMain.exe"
-        }
-    ],
-    "finsemble": {
-        "applicationRoot": "http://localhost:3375",
-        "moduleRoot": "$applicationRoot/finsemble",
-        "servicesRoot": "$applicationRoot/finsemble/services",
-        "notificationURL": "$applicationRoot/components/notification/notification.html",
-        "bootConfig": {
-            "onErrorMakeSystemManagerVisible": true,
-            "defaults": {
-                "startServiceTimeout": 10000,
-                "startComponentTimeout": 15000,
-                "startTaskTimeout": 10000
-            }
-        },
-        "importConfig": [
-            "$applicationRoot/configs/application/config.json"
-        ],
-        "router": {
-            "crossDomainTransport": "IPCBus",
-            "transportSettings": {
-                "FinsembleTransport": {
-                    "serverAddress": "ws://127.0.0.1:3376"
-                }
-            }
-        }
-    }
+	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/manifestFile.schema.json",
+	"devtools_port": 9090,
+	"startup_app": {
+		"name": "Cosaic Local",
+		"url": "http://localhost:3375/finsemble/services/systemManager/systemManager.html",
+		"uuid": "Finsemble",
+		"requireHandshake": true,
+		"applicationIcon": "http://localhost:3375/assets/img/Finsemble_Taskbar_Icon.png",
+		"defaultTop": 75,
+		"defaultLeft": 200,
+		"defaultHeight": 950,
+		"defaultWidth": 700,
+		"showTaskbarIcon": true,
+		"autoShow": false,
+		"frame": true,
+		"resizable": true,
+		"maximizable": false,
+		"delay_connection": true,
+		"contextMenu": true,
+		"cornerRounding": {
+			"width": 4,
+			"height": 4
+		},
+		"alwaysOnTop": false
+	},
+	"splashScreenImage": "http://localhost:3375/assets/img/FinsembleSplash.svg",
+	"appAssets": [
+		{
+			"src": "https://assets.finsemble.com/assimilation/assimilation_5.1.0.0.zip",
+			"version": "5.1.0.0",
+			"alias": "assimilation",
+			"target": "AssimilationMain.exe"
+		}
+	],
+	"finsemble": {
+		"applicationRoot": "http://localhost:3375",
+		"moduleRoot": "$applicationRoot/finsemble",
+		"servicesRoot": "$applicationRoot/finsemble/services",
+		"notificationURL": "$applicationRoot/components/notification/notification.html",
+		"configSchemaURL": "$moduleRoot/configs/schemas/finsemble.schema.json",
+		"bootConfig": {
+			"onErrorMakeSystemManagerVisible": true,
+			"defaults": {
+				"startServiceTimeout": 10000,
+				"startComponentTimeout": 15000,
+				"startTaskTimeout": 10000
+			}
+		},
+		"router": {
+			"crossDomainTransport": "IPCBus",
+			"sameDomainTransport": "SharedWorker",
+			"transportSettings": {
+				"FinsembleTransport": {
+					"serverAddress": "ws://127.0.0.1:3376"
+				}
+			},
+			"promptBeforeAllowingExternalApps": false
+		},
+		"logger": {
+			"defaultClientLogLevels": {
+				"Error": true,
+				"Warn": true,
+				"Info": false,
+				"Log": true,
+				"Debug": false,
+				"Verbose": false,
+				"LocalOnly": false
+			}
+		},
+		"custom": {
+			"//": "Customer macros definitions must go here (e.g. 'myApplicationRoot' so it can be referenced elsewhere as '$myApplicationRoot'), along with other custom config at this level."
+		},
+		"importConfig": ["$applicationRoot/configs/application/config.json"]
+	},
+	"finsemble-electron-adapter": {
+		"useDOMBasedMovement": true,
+		"allowedManifestDomains": ["*"]
+	}
 }

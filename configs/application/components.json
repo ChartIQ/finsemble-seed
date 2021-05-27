@@ -1,13 +1,16 @@
 {
 	"comment": "Sample component configuration",
+	"$schema": "../../node_modules/@finsemble/finsemble-core/configs/schemas/fileBasedSchemas/componentsFile.schema.json",
 	"components": {
 		"Welcome Component": {
 			"window": {
 				"url": "$applicationRoot/components/welcome/welcome.html",
 				"affinity": "workspaceComponents",
-				"frame": false,
-				"resizable": true,
-				"autoShow": true,
+				"options": {
+					"resizable": true,
+					"autoShow": true,
+					"alwaysOnTop": false
+				},
 				"top": "center",
 				"left": "center",
 				"width": 400,
@@ -32,6 +35,7 @@
 						"launchableByUser": true
 					},
 					"Window Manager": {
+						"alwaysOnTopIcon": false,
 						"showLinker": true,
 						"FSBLHeader": true,
 						"persistWindowState": true,
@@ -47,13 +51,21 @@
 			"window": {
 				"url": "$applicationRoot/components/nonConfiguredComponent/nonConfiguredComponent.html",
 				"affinity": "systemComponents",
-				"frame": false,
-				"resizable": true,
-				"autoShow": true,
+				"options": {
+					"resizable": true,
+					"autoShow": true
+				},
 				"top": "center",
 				"left": "center",
 				"width": 400,
 				"height": 432
+			},
+			"foreign": {
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					}
+				}
 			}
 		},
 		"Notepad": {
@@ -61,21 +73,15 @@
 				"windowType": "assimilation",
 				"path": "notepad.exe",
 				"defaultHeight": 600,
-				"autoShow": true,
-				"resizable": true,
+				"options": {
+					"autoShow": true
+				},
 				"showTaskbarIcon": false,
 				"contextMenu": true,
-				"addToWorkspace": true,
-				"options": {
-					"alwaysOnTop": false
-				}
+				"addToWorkspace": true
 			},
 			"component": {
-				"spawnOnHotkey": [
-					"ctrl",
-					"alt",
-					"n"
-				]
+				"spawnOnHotkey": ["ctrl", "alt", "n"]
 			},
 			"foreign": {
 				"services": {
@@ -99,7 +105,7 @@
 		},
 		"Getting Started Tutorial": {
 			"window": {
-				"url": "https://www.chartiq.com/tutorials/?slug=finsemble",
+				"url": "https://documentation.finsemble.com/tutorial-gettingStarted.html",
 				"height": 800,
 				"width": 1000
 			},
@@ -153,25 +159,58 @@
 				}
 			}
 		},
-		"defaultAuthentication": {
+		"Authentication": {
 			"window": {
-				"url": "$applicationRoot/components/authentication/defaultAuthentication.html",
+				"url": "$applicationRoot/components/authentication/Authentication.html",
 				"top": "center",
 				"left": "center",
 				"width": 358,
-				"height": 658,
+				"height": 460,
 				"ephemeral": true,
+				"alwaysOnTop": true,
 				"options": {
-					"autoShow": false
+					"autoShow": true
 				}
 			},
 			"component": {
-				"neededClients": [
-					"LauncherClient",
-					"AuthenticationClient",
-					"StorageClient"
-				],
+				"neededClients": ["LauncherClient", "AuthenticationClient", "StorageClient"],
 				"category": "system"
+			},
+			"foreign": {
+				"services": {
+					"windowService": {
+						"allowAutoArrange": false
+					}
+				},
+				"components": {
+					"App Launcher": {
+						"launchableByUser": false
+					},
+					"Window Manager": {
+						"FSBLHeader": false,
+						"persistWindowState": false
+					}
+				}
+			}
+		},
+		"Registration": {
+			"window": {
+				"url": "https://share.hsforms.com/1AKJh9VQWQVe7avNRsD-sHw53bla",
+				"top": "center",
+				"left": "center",
+				"width": 855,
+				"height": 715,
+				"ephemeral": true,
+				"alwaysOnTop": true,
+				"options": {
+					"autoShow": false,
+					"securityPolicy": "trusted"
+				}
+			},
+			"component": {
+				"neededClients": ["LauncherClient", "AuthenticationClient", "StorageClient"],
+				"category": "system",
+				"preload": "$applicationRoot/preloads/registration.js"
 			},
 			"foreign": {
 				"services": {

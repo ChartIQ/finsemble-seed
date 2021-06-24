@@ -26,3 +26,4 @@ installer-tmp/
 pkg/
 pkg-development/
 pkg-production/
+dist/
